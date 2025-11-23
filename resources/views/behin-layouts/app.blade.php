@@ -144,7 +144,7 @@
     <script src="{{ url('behin/behin-dist/plugins/mapp/js/mapp.env.js') . '?' . config('app.version') }}"></script>
 
     <script>
-        window.appUrl = "{{ url('') }}";
+        window.appUrl = "{{ url('') }}/";
     </script>
     <script src="{{ url('behin/behin-js/ajax.js') . '?' . config('app.version') }}"></script>
     <script src="{{ url('behin/behin-js/dataTable.js') . '?' . config('app.version') }}"></script>
