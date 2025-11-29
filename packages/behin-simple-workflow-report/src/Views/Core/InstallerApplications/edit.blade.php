@@ -93,7 +93,7 @@
                                                     <input type="file" name="projects[{{ $index }}][image]" class="form-control">
                                                     @if ($project->image_path)
                                                         <div class="mt-2">
-                                                            <img src="{{ asset('storage/app/public/' . $project->image_path) }}" alt="project image" class="img-thumbnail" style="max-width: 200px;">
+                                                            <img src="{{ 'storage/app/public/' . $project->image_path }}" alt="project image" class="img-thumbnail" style="max-width: 200px;">
                                                         </div>
                                                     @endif
                                                 </div>
