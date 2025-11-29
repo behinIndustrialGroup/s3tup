@@ -18,4 +18,14 @@ class InstallerApplication extends Model
         'city',
         'description',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(\Behin\SimpleWorkflowReport\Models\InstallerApplicationProfile::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(\Behin\SimpleWorkflowReport\Models\InstallerApplicationProject::class);
+    }
 }

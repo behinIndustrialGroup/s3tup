@@ -18,6 +18,7 @@ use Behin\SimpleWorkflowReport\Controllers\Core\MyRequestController;
 use Behin\SimpleWorkflowReport\Controllers\Core\StageReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\RoleReportFormController;
 use Behin\SimpleWorkflowReport\Controllers\Core\SummaryReportController;
+use Behin\SimpleWorkflowReport\Controllers\Core\InstallerApplicationReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\PersonelActivityController;
 use Behin\SimpleWorkflowReport\Controllers\Core\PhonebookController;
 use Behin\SimpleWorkflowReport\Controllers\Core\RecordingController;
@@ -38,6 +39,9 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
 
     Route::get('stage-report/export', [StageReportController::class, 'export'])->name('stage-report.export');
     Route::get('stage-report', [StageReportController::class, 'index'])->name('stage-report.index');
+
+    Route::resource('installer-applications', InstallerApplicationReportController::class)
+        ->only(['index', 'edit', 'update']);
 
 
 });
