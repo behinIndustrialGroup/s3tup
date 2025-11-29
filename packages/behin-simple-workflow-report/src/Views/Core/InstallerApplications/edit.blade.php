@@ -145,7 +145,7 @@
     </template>
 @endsection
 
-@push('scripts')
+@section('script')
     <script>
         (function() {
             let projectIndex = {{ $application->projects->count() }};
@@ -183,4 +183,4 @@
             });
         })();
     </script>
-@endpush
+@endsection
