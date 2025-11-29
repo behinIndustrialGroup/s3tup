@@ -46,10 +46,10 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3">
                             <div class="text-muted small">
-                                نمایش {{ $rows->firstItem() ?? 0 }} تا {{ $rows->lastItem() ?? 0 }} از {{ number_format($rows->total()) }} رکورد
+                                نمایش {{ $applications->firstItem() ?? 0 }} تا {{ $applications->lastItem() ?? 0 }} از {{ number_format($applications->total()) }} رکورد
                             </div>
                             <div>
-                                {{ $rows->onEachSide(1)->links('pagination::bootstrap-4') }}
+                                {{ $applications->onEachSide(1)->links('pagination::bootstrap-4') }}
                             </div>
                         </div>
                     </div>
