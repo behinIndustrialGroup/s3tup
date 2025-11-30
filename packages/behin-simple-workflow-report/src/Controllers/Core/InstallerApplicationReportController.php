@@ -138,12 +138,12 @@ class InstallerApplicationReportController extends Controller
 
         //ایجاد فرایندارزیابی و جذب نصابان
         $inbox = ProcessController::startFromScript(
-            "",
+            "b888695c-ac14-495b-99bb-fd7155459f23",
             $user->id,
             null,
             null
         );
-return $inbox;
+
         //متغیرها از جدول نصابان در پرونده ذخیره شود
         $case = $inbox->case;
         $case->saveVariable('user-firstname', $installerApplication->first_name);
