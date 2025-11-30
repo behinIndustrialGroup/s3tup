@@ -47,6 +47,7 @@ return [
             'submenu' => [
                 'all-requests' => [ 'fa_name' => 'کل درخواست ها', 'route-name' => 'simpleWorkflowReport.all-requests.index' ],
                 'summary' => [ 'fa_name' => 'خلاصه', 'route-name' => 'simpleWorkflowReport.summary-report.index' ],
+                'installer-applications' => [ 'fa_name' => 'نصابان-لندینگ', 'route-name' => 'simpleWorkflowReport.installer-applications.index' ],
                 'my-request' => [ 'fa_name' => 'درخواست‌های من', 'route-name' => 'simpleWorkflowReport.my-request.index' ],
                 'role-form-control' => [ 'fa_name' => 'فرم گزارش نقش ها', 'route-name' => 'simpleWorkflowReport.role.index' ],
             ]

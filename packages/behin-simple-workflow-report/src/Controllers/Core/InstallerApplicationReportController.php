@@ -8,6 +8,7 @@ use App\Models\User;
 use Behin\SimpleWorkflow\Controllers\Core\ProcessController;
 use Behin\SimpleWorkflowReport\Models\InstallerApplicationProfile;
 use Behin\SimpleWorkflowReport\Models\InstallerApplicationProject;
+use Behin\Sms\Controllers\SmsController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -154,7 +155,14 @@ class InstallerApplicationReportController extends Controller
         $case->saveVariable('description', $installerApplication->description);
 
         //ارسال پیامک به نصاب جهت تکمیل پروفایل
-
+        SmsController::sendByTemp(
+            $mobile,
+            786973,
+            array([
+                'key' => 'NAME',
+                'value' => $installerApplication->first_name . ' ' . $installerApplication->last_name,
+            ])
+        );
         //حذف ثبت نام نصاب از جدول نصابان
         $installerApplication->delete();
     }
