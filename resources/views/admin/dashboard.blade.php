@@ -65,27 +65,29 @@
         }
     </style>
     <div class="container py-4">
-        <div class="row g-3 text-center justify-content-center mb-2">
-            <div class="col-12" style="padding: 0px">
-                <div class="hero-banner rounded-4 shadow-sm text-white text-center p-5">
-                    <h2 class="fw-bold mb-3 animate__animated animate__fadeInDown">
-                        ستاپ
-                    </h2>
-                    <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-                        خیلی راحت می‌توانید درخواست خود را ثبت کنید و به پیمانکار مربوطه متصل شوید.
-                    </p>
-                    <a href="{{ route('simpleWorkflow.process.start', [
-                        'taskId' => 'cf8147ed-042e-49a9-a9cf-04b7591a4eca',
-                        'force' => 1,
-                        'redirect' => 1,
-                        'inDraft' => 0,
-                    ]) }}"
-                        class="btn btn-warning btn-lg rounded-pill px-4 animate__animated animate__pulse animate__infinite">
-                        🚀 ثبت درخواست
-                    </a>
+        @if (access('بنر ثبت درخواست احداث نیروگاه'))
+            <div class="row g-3 text-center justify-content-center mb-2">
+                <div class="col-12" style="padding: 0px">
+                    <div class="hero-banner rounded-4 shadow-sm text-white text-center p-5">
+                        <h2 class="fw-bold mb-3 animate__animated animate__fadeInDown">
+                            ستاپ
+                        </h2>
+                        <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                            خیلی راحت می‌توانید درخواست خود را ثبت کنید و به پیمانکار مربوطه متصل شوید.
+                        </p>
+                        <a href="{{ route('simpleWorkflow.process.start', [
+                            'taskId' => 'cf8147ed-042e-49a9-a9cf-04b7591a4eca',
+                            'force' => 1,
+                            'redirect' => 1,
+                            'inDraft' => 0,
+                        ]) }}"
+                            class="btn btn-warning btn-lg rounded-pill px-4 animate__animated animate__pulse animate__infinite">
+                            🚀 ثبت درخواست
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         <!-- اضافه کردن Animate.css از CDN -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -180,6 +182,16 @@
                             <i class="icon-circle bg-success bi bi-list"></i>
                         </div>
                         <span>درخواست‌های من</span>
+                    </a>
+                </div>
+            @endif
+            @if (auth()->user()->access('کارتابل من'))
+                <div class="col-4 col-md-3">
+                    <a href="{{ route('simpleWorkflow.inbox.categorized') }}" class="mobile-tile text-decoration-none">
+                        <div class="text-white">
+                            <i class="icon-circle bg-success bi bi-list"></i>
+                        </div>
+                        <span>کارتابل من</span>
                     </a>
                 </div>
             @endif
