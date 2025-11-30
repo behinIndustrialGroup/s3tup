@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <a href="{{ route('simpleWorkflowReport.installer-applications.send-for-complete-profile', $application) }}">ارسال جهت تکمیل پروفایل</a>
+                    <a class="btn btn-danger" href="{{ route('simpleWorkflowReport.installer-applications.send-for-complete-profile', $application) }}">ارسال جهت تکمیل پروفایل</a>
                 </div>
             </div>
         </div>
