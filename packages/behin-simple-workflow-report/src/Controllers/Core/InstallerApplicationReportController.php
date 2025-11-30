@@ -143,9 +143,12 @@ class InstallerApplicationReportController extends Controller
             null,
             null
         );
+        $inbox->case_name = "تکمیل پروفایل " . $installerApplication->first_name . ' ' . $installerApplication->last_name;
+        $inbox->save();
 
         //متغیرها از جدول نصابان در پرونده ذخیره شود
         $case = $inbox->case;
+        $case->name = "پروفایل " . $installerApplication->first_name . ' ' . $installerApplication->last_name;
         $case->saveVariable('user-firstname', $installerApplication->first_name);
         $case->saveVariable('user-lastname', $installerApplication->last_name);
         $case->saveVariable('user-national_id', $installerApplication->national_id);
