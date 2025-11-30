@@ -143,7 +143,7 @@ class InstallerApplicationReportController extends Controller
             null,
             null
         );
-
+return $inbox;
         //متغیرها از جدول نصابان در پرونده ذخیره شود
         $case = $inbox->case;
         $case->saveVariable('user-firstname', $installerApplication->first_name);
