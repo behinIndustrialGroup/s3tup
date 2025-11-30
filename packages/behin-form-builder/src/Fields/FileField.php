@@ -26,7 +26,7 @@ class FileField extends AbstractField
         } else {
             $s .= '<input type="file" name="' . $this->name . '" ';
             foreach ($this->attributes as $key => $value) {
-                if ($key != 'value') {
+                if ($key != 'value' and $key != 'script') {
                     if ($key == 'required') {
                         if ($value == 'on') {
                             $s .= 'required ';
