@@ -15,7 +15,7 @@ use Behin\SimpleWorkflow\Controllers\Core\TaskJumpController;
 use Behin\SimpleWorkflow\Controllers\Core\ViewModelController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth'])->group(function(){
+Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth', 'access:گردش کار'])->group(function(){
     Route::name('process.')->prefix('process')->group(function(){
         Route::get('', [ ProcessController::class, 'index' ])->name('index');
         Route::get('create', [ ProcessController::class, 'create' ])->name('create');
