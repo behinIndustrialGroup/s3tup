@@ -148,7 +148,7 @@ class InstallerApplicationReportController extends Controller
         $case = $inbox->case;
         $case->saveVariable('user-firstname', $installerApplication->first_name);
         $case->saveVariable('user-lastname', $installerApplication->last_name);
-        $case->saveVariable('user-national-id', $installerApplication->national_id);
+        $case->saveVariable('user-national_id', $installerApplication->national_id);
         $case->saveVariable('mobile', $installerApplication->phone);
         $case->saveVariable('province', $installerApplication->province);
         $case->saveVariable('city', $installerApplication->city);
@@ -156,7 +156,7 @@ class InstallerApplicationReportController extends Controller
         $case->saveVariable('installer_id', $user->id);
 
         //ارسال پیامک به نصاب جهت تکمیل پروفایل
-        SmsController::sendByTemp(
+        $response = SmsController::sendByTemp(
             $mobile,
             786973,
             array([
@@ -164,6 +164,7 @@ class InstallerApplicationReportController extends Controller
                 'value' => $installerApplication->first_name . ' ' . $installerApplication->last_name,
             ])
         );
+        return $response;
         //حذف ثبت نام نصاب از جدول نصابان
         $installerApplication->delete();
     }
