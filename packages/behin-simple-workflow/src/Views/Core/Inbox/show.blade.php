@@ -376,7 +376,7 @@
                             }
                         } else {
                             show_message(response.msg)
-                            window.location.href = '{{ route('simpleWorkflow.inbox.index') }}';
+                            window.location.href = '{{ route('simpleWorkflow.inbox.categorized') }}';
                         }
                     } else {
                         show_error(response.msg);
