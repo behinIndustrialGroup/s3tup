@@ -160,7 +160,7 @@ class InstallerApplicationReportController extends Controller
             $mobile,
             786973,
             array([
-                'key' => 'NAME',
+                'name' => 'NAME',
                 'value' => $installerApplication->first_name . ' ' . $installerApplication->last_name,
             ])
         );
