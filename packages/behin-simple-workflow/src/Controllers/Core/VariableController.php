@@ -78,6 +78,8 @@ class VariableController extends Controller
                 'key' => $key,
                 'value' => $result['dir']
             ]);
+        }else{
+            return $result;
         }
     }
 }

@@ -58,7 +58,13 @@ class RoutingController extends Controller
                 continue;
             }
             if (gettype($value) == 'object') {
-                VariableController::saveFile($processId, $caseId, $key, $value);
+                $result = VariableController::saveFile($processId, $caseId, $key, $value);
+                if($result['status'] != 200){
+                    return [
+                        'status' => 400,
+                        'msg' => $result['message']
+                    ];
+                }
             } else {
                 if (is_array($value)) {
                     $value = json_encode($value);
@@ -478,4 +484,6 @@ class RoutingController extends Controller
             return response()->json(['status' => 400, 'msg' => $th->getMessage()]);
         }
     }
+}
+
 }
