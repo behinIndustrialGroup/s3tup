@@ -127,7 +127,7 @@ class InstallerApplicationReportController extends Controller
         //آیا کاربری با شماره موبایل نصاب وجود دارد؟
         // اگر وجود نداشت بساز
         $mobile = convertPersianToEnglish($installerApplication->phone);
-        $user = User::where('mobile', $mobile)->first();
+        $user = User::where('email', $mobile)->first();
         if(!$user){
             $user = new User();
             $user->email = $mobile;
