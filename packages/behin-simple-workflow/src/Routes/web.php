@@ -16,23 +16,23 @@ use Behin\SimpleWorkflow\Controllers\Core\ViewModelController;
 use BehinInit\App\Http\Middleware\Access;
 use Illuminate\Support\Facades\Route;
 
-Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth', Access::class. ':گردش کار'])->group(function(){
+Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth'])->group(function(){
     Route::name('process.')->prefix('process')->group(function(){
-        Route::get('', [ ProcessController::class, 'index' ])->name('index');
-        Route::get('create', [ ProcessController::class, 'create' ])->name('create');
-        Route::post('store', [ ProcessController::class, 'store' ])->name('store');
-        Route::get('{processId}/edit', [ ProcessController::class, 'edit' ])->name('edit');
-        Route::put('{processId}', [ ProcessController::class, 'update' ])->name('update');
+        Route::get('', [ ProcessController::class, 'index' ])->middleware(Access::class. ':گردش کار')->name('index');
+        Route::get('create', [ ProcessController::class, 'create' ])->middleware(Access::class. ':گردش کار')->name('create');
+        Route::post('store', [ ProcessController::class, 'store' ])->middleware(Access::class. ':گردش کار')->name('store');
+        Route::get('{processId}/edit', [ ProcessController::class, 'edit' ])->middleware(Access::class. ':گردش کار')->name('edit');
+        Route::put('{processId}', [ ProcessController::class, 'update' ])->middleware(Access::class. ':گردش کار')->name('update');
         Route::get('start-list', [ ProcessController::class, 'startListView' ])->name('startListView');
 
-        Route::get('check-error/{processId}', [ ProcessController::class, 'processHasError' ])->name('processHasError');
-        Route::get('{processId}/export-view', [ ProcessController::class, 'exportView' ])->name('exportView');
-        Route::get('import-view', [ ProcessController::class, 'importView' ])->name('importView');
-        Route::get('{processId}/export', [ ProcessController::class, 'export' ])->name('export');
-        Route::post('import', [ ProcessController::class, 'import' ])->name('import');
+        Route::get('check-error/{processId}', [ ProcessController::class, 'processHasError' ])->middleware(Access::class. ':گردش کار')->name('processHasError');
+        Route::get('{processId}/export-view', [ ProcessController::class, 'exportView' ])->middleware(Access::class. ':گردش کار')->name('exportView');
+        Route::get('import-view', [ ProcessController::class, 'importView' ])->middleware(Access::class. ':گردش کار')->name('importView');
+        Route::get('{processId}/export', [ ProcessController::class, 'export' ])->middleware(Access::class. ':گردش کار')->name('export');
+        Route::post('import', [ ProcessController::class, 'import' ])->middleware(Access::class. ':گردش کار')->name('import');
     });
 
-    Route::name('task.')->prefix('task')->group(function(){
+    Route::name('task.')->prefix('task')->middleware(Access::class. ':گردش کار')->group(function(){
         Route::get('index/{process_id}', [ TaskController::class, 'index' ])->name('index');
         Route::post('create', [ TaskController::class, 'create' ])->name('create');
         Route::get('{task}/edit', [ TaskController::class, 'edit' ])->name('edit');
@@ -43,7 +43,7 @@ Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth', A
 
     });
 
-    Route::name('form.')->prefix('form')->group(function(){
+    Route::name('form.')->prefix('form')->middleware(Access::class. ':گردش کار')->group(function(){
         Route::get('index', [ FormController::class, 'index' ])->name('index');
         Route::get('edit/{id}', [ FormController::class, 'edit' ])->name('edit');
         Route::post('update', [ FormController::class, 'update' ])->name('update');
@@ -61,19 +61,19 @@ Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth', A
 
     Route::post('scripts/export', [ScriptController::class, 'export'])->name('scripts.export');
     Route::post('scripts/import', [ScriptController::class, 'import'])->name('scripts.import');
-    Route::resource('scripts', ScriptController::class);
+    Route::resource('scripts', ScriptController::class)->middleware(Access::class. ':گردش کار');
     Route::post('scripts/{id}/test', [ ScriptController::class, 'test' ])->name('scripts.test');
     Route::any('scripts/{id}/run', [ ScriptController::class, 'runFromView' ])->name('scripts.run');
     Route::post('/scripts/autocomplete', [ScriptController::class, 'autocomplete'])->name('scripts.autocomplete');
 
 
-    Route::resource('conditions', ConditionController::class);
+    Route::resource('conditions', ConditionController::class)->middleware(Access::class. ':گردش کار');
     Route::post('conditions/{id}/test', [ ConditionController::class, 'runConditionForTest' ])->name('conditions.test');
-    Route::resource('task-actors', TaskActorController::class);
-    Route::post('fields/export', [FieldController::class, 'export'])->name('fields.export');
-    Route::post('fields/import', [FieldController::class, 'import'])->name('fields.import');
-    Route::resource('fields', FieldController::class);
-    Route::get('fields/{field}/copy', [FieldController::class, 'copy'])->name('fields.copy');
+    Route::resource('task-actors', TaskActorController::class)->middleware(Access::class. ':گردش کار');
+    Route::post('fields/export', [FieldController::class, 'export'])->middleware(Access::class. ':گردش کار')->name('fields.export');
+    Route::post('fields/import', [FieldController::class, 'import'])->middleware(Access::class. ':گردش کار')->name('fields.import');
+    Route::resource('fields', FieldController::class)->middleware(Access::class. ':گردش کار');
+    Route::get('fields/{field}/copy', [FieldController::class, 'copy'])->middleware(Access::class. ':گردش کار')->name('fields.copy');
 
     Route::name('inbox.')->prefix('inbox')->group(function(){
         Route::get('categorized', [ InboxController::class, 'categorized' ])->name('categorized');
@@ -101,29 +101,29 @@ Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth', A
         Route::get('view/{inboxId}', [ InboxController::class, 'view' ])->name('view');
     });
 
-    Route::resource('entities', EntityController::class);
-    Route::post('entities/export', [EntityController::class, 'export'])->name('entities.export');
-    Route::post('entities/import', [EntityController::class, 'import'])->name('entities.import');
-    Route::get('entities/{entity}/create-table', [EntityController::class, 'createTable'])->name('entities.createTable');
-    Route::get('entities/{entity}/records', [EntityController::class, 'records'])->name('entities.records');
-    Route::get('entities/{entity}/records/create', [EntityController::class, 'createRecord'])->name('entities.createRecord');
-    Route::post('entities/{entity}/records', [EntityController::class, 'storeRecord'])->name('entities.storeRecord');
-    Route::post('entities/{entity}/records/export', [EntityController::class, 'exportRecords'])->name('entities.records.export');
-    Route::post('entities/{entity}/records/import', [EntityController::class, 'importRecords'])->name('entities.records.import');
-    Route::get('entities/{entity}/records/{id}/edit', [EntityController::class, 'editRecord'])->name('entities.editRecord');
-    Route::put('entities/{entity}/records/{id}', [EntityController::class, 'updateRecord'])->name('entities.updateRecord');
-    Route::delete('entities/{entity}/records/{id}', [EntityController::class, 'deleteRecord'])->name('entities.deleteRecord');
+    Route::resource('entities', EntityController::class)->middleware(Access::class. ':گردش کار');
+    Route::post('entities/export', [EntityController::class, 'export'])->middleware(Access::class. ':گردش کار')->name('entities.export');
+    Route::post('entities/import', [EntityController::class, 'import'])->middleware(Access::class. ':گردش کار')->name('entities.import');
+    Route::get('entities/{entity}/create-table', [EntityController::class, 'createTable'])->middleware(Access::class. ':گردش کار')->name('entities.createTable');
+    Route::get('entities/{entity}/records', [EntityController::class, 'records'])->middleware(Access::class. ':گردش کار')->name('entities.records');
+    Route::get('entities/{entity}/records/create', [EntityController::class, 'createRecord'])->middleware(Access::class. ':گردش کار')->name('entities.createRecord');
+    Route::post('entities/{entity}/records', [EntityController::class, 'storeRecord'])->middleware(Access::class. ':گردش کار')->name('entities.storeRecord');
+    Route::post('entities/{entity}/records/export', [EntityController::class, 'exportRecords'])->middleware(Access::class. ':گردش کار')->name('entities.records.export');
+    Route::post('entities/{entity}/records/import', [EntityController::class, 'importRecords'])->middleware(Access::class. ':گردش کار')->name('entities.records.import');
+    Route::get('entities/{entity}/records/{id}/edit', [EntityController::class, 'editRecord'])->middleware(Access::class. ':گردش کار')->name('entities.editRecord');
+    Route::put('entities/{entity}/records/{id}', [EntityController::class, 'updateRecord'])->middleware(Access::class. ':گردش کار')->name('entities.updateRecord');
+    Route::delete('entities/{entity}/records/{id}', [EntityController::class, 'deleteRecord'])->middleware(Access::class. ':گردش کار')->name('entities.deleteRecord');
 
     Route::resource('task-jump', TaskJumpController::class);
     Route::get('task-jump/{task_id}/{inbox_id}/{case_id}/{process_id}', [TaskJumpController::class, 'show'])->name('task-jump.show');
 
-    Route::resource('view-model', ViewModelController::class);
-    Route::get('view-model/{view_model}/copy', [ViewModelController::class, 'copy'])->name('view-model.copy');
-    Route::post('view-model/export', [ViewModelController::class, 'export'])->name('view-model.export');
-    Route::post('view-model/import', [ViewModelController::class, 'import'])->name('view-model.import');
-    Route::post('get-view-model-rows', [ViewModelController::class, 'getRows'])->name('view-model.get-rows');
-    Route::post('update-view-model-record', [ViewModelController::class, 'updateRecord'])->name('view-model.update-record');
-    Route::post('delete-view-model-record', [ViewModelController::class, 'deleteRecord'])->name('view-model.delete-record');
+    Route::resource('view-model', ViewModelController::class)->middleware(Access::class. ':گردش کار');
+    Route::get('view-model/{view_model}/copy', [ViewModelController::class, 'copy'])->middleware(Access::class. ':گردش کار')->name('view-model.copy');
+    Route::post('view-model/export', [ViewModelController::class, 'export'])->middleware(Access::class. ':گردش کار')->name('view-model.export');
+    Route::post('view-model/import', [ViewModelController::class, 'import'])->middleware(Access::class. ':گردش کار')->name('view-model.import');
+    Route::post('get-view-model-rows', [ViewModelController::class, 'getRows'])->middleware(Access::class. ':گردش کار')->name('view-model.get-rows');
+    Route::post('update-view-model-record', [ViewModelController::class, 'updateRecord'])->middleware(Access::class. ':گردش کار')->name('view-model.update-record');
+    Route::post('delete-view-model-record', [ViewModelController::class, 'deleteRecord'])->middleware(Access::class. ':گردش کار')->name('view-model.delete-record');
 });
 
 Route::get('workflow/process/start/{taskId}/{force?}/{redirect?}/{inDraft?}', [ ProcessController::class, 'start' ])->name('simpleWorkflow.process.start')->middleware('web');

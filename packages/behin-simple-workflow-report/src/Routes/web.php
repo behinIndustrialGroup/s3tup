@@ -37,12 +37,15 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
     Route::get('all-requests/{case_number}', [AllRequestsReportController::class, 'show'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.show');
     Route::get('all-requests', [AllRequestsReportController::class, 'index'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.index');
 
-    Route::get('stage-report/export', [StageReportController::class, 'export'])->name('stage-report.export');
-    Route::get('stage-report', [StageReportController::class, 'index'])->name('stage-report.index');
+    Route::get('stage-report/export', [StageReportController::class, 'export'])->middleware(Access::class. ':گزارش مرحله ها')->name('stage-report.export');
+    Route::get('stage-report', [StageReportController::class, 'index'])->middleware(Access::class. ':گزارش مرحله ها')->name('stage-report.index');
 
     Route::resource('installer-applications', InstallerApplicationReportController::class)
+        ->middleware(Access::class. ':گزارش لیست ثبت نام نصابان - لندینگ پیج')
         ->only(['index', 'edit', 'update']);
 
-    Route::get('installer-applications/{installerApplication}/send-for-complete-profile', [InstallerApplicationReportController::class, 'sendForCompeleteProfile'])->name('installer-applications.send-for-complete-profile');
+    Route::get('installer-applications/{installerApplication}/send-for-complete-profile', [InstallerApplicationReportController::class, 'sendForCompeleteProfile'])
+    ->middleware(Access::class. ':گزارش لیست ثبت نام نصابان - لندینگ پیج')
+    ->name('installer-applications.send-for-complete-profile');
 
 });
