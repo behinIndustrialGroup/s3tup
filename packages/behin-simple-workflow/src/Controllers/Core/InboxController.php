@@ -314,7 +314,7 @@ class InboxController extends Controller
                 }
             }
             if (!isset($form->content)) {
-                return redirect()->route('simpleWorkflow.inbox.index')->with('error', trans('Form not found'));
+                return redirect()->route('simpleWorkflow.inbox.categorized')->with('error', trans('Form not found'));
             }
             if($task->assignment_type == 'public'){
                 return view('SimpleWorkflowView::Core.Inbox.public-show')->with([
