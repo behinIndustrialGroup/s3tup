@@ -62,7 +62,7 @@ class RoutingController extends Controller
                 if($result['status'] != 200){
                     return [
                         'status' => 400,
-                        'msg' => $result['message']
+                        'msg' => trans('fields.'.$result['message'])
                     ];
                 }
             } else {
