@@ -4,6 +4,8 @@ namespace Behin\SimpleWorkflowReport\Controllers\Core;
 
 use App\Http\Controllers\Controller;
 use App\Models\InstallerApplication;
+use App\Models\User;
+use Behin\SimpleWorkflow\Controllers\Core\ProcessController;
 use Behin\SimpleWorkflowReport\Models\InstallerApplicationProfile;
 use Behin\SimpleWorkflowReport\Models\InstallerApplicationProject;
 use Illuminate\Http\RedirectResponse;
@@ -118,5 +120,42 @@ class InstallerApplicationReportController extends Controller
         return redirect()
             ->route('simpleWorkflowReport.installer-applications.edit', $installerApplication)
             ->with('success', 'اطلاعات با موفقیت به‌روزرسانی شد.');
+    }
+
+    public function sendForCompeleteProfile(InstallerApplication $installerApplication){
+        //آیا کاربری با شماره موبایل نصاب وجود دارد؟
+        // اگر وجود نداشت بساز
+        $mobile = convertPersianToEnglish($installerApplication->phone);
+        $user = User::where('mobile', $mobile)->first();
+        if(!$user){
+            $user = new User();
+            $user->email = $mobile;
+            $user->name = $installerApplication->first_name . ' ' . $installerApplication->last_name;
+            $user->save();
+        }
+        $user->update(['role_id' => 10]);
+
+        //ایجاد فرایندارزیابی و جذب نصابان
+        $inbox = ProcessController::startFromScript(
+            "",
+            $user->id,
+            null,
+            null
+        );
+
+        //متغیرها از جدول نصابان در پرونده ذخیره شود
+        $case = $inbox->case;
+        $case->saveVariable('user-firstname', $installerApplication->first_name);
+        $case->saveVariable('user-lastname', $installerApplication->last_name);
+        $case->saveVariable('user-national-id', $installerApplication->national_id);
+        $case->saveVariable('mobile', $installerApplication->phone);
+        $case->saveVariable('province', $installerApplication->province);
+        $case->saveVariable('city', $installerApplication->city);
+        $case->saveVariable('description', $installerApplication->description);
+
+        //ارسال پیامک به نصاب جهت تکمیل پروفایل
+
+        //حذف ثبت نام نصاب از جدول نصابان
+        $installerApplication->delete();
     }
 }

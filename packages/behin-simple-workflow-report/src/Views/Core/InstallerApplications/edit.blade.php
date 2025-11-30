@@ -69,7 +69,8 @@
 
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h5 class="mb-0">پروژه‌ها</h5>
-                                <button type="button" id="add-project" class="btn btn-outline-primary btn-sm">افزودن پروژه</button>
+                                <button type="button" id="add-project" class="btn btn-outline-primary btn-sm">افزودن
+                                    پروژه</button>
                             </div>
 
                             <div id="projects-wrapper">
@@ -78,22 +79,29 @@
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <h6 class="mb-0">پروژه {{ $index + 1 }}</h6>
-                                                <button type="button" class="btn btn-outline-danger btn-sm remove-project">حذف</button>
+                                                <button type="button"
+                                                    class="btn btn-outline-danger btn-sm remove-project">حذف</button>
                                             </div>
-                                            <input type="hidden" name="projects[{{ $index }}][id]" value="{{ $project->id }}" class="project-id">
-                                            <input type="hidden" name="projects[{{ $index }}][remove]" value="0" class="project-remove">
+                                            <input type="hidden" name="projects[{{ $index }}][id]"
+                                                value="{{ $project->id }}" class="project-id">
+                                            <input type="hidden" name="projects[{{ $index }}][remove]"
+                                                value="0" class="project-remove">
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">عنوان پروژه</label>
-                                                    <input type="text" name="projects[{{ $index }}][title]" class="form-control"
+                                                    <input type="text" name="projects[{{ $index }}][title]"
+                                                        class="form-control"
                                                         value="{{ old("projects.$index.title", $project->title) }}">
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                     <label class="form-label">تصویر</label>
-                                                    <input type="file" name="projects[{{ $index }}][image]" class="form-control">
+                                                    <input type="file" name="projects[{{ $index }}][image]"
+                                                        class="form-control">
                                                     @if ($project->image_path)
                                                         <div class="mt-2">
-                                                            <img src="{{ 'https://s3tup.com/storage/app/public/' . $project->image_path }}" alt="project image" class="img-thumbnail" style="max-width: 200px;">
+                                                            <img src="{{ 'https://s3tup.com/storage/app/public/' . $project->image_path }}"
+                                                                alt="project image" class="img-thumbnail"
+                                                                style="max-width: 200px;">
                                                         </div>
                                                     @endif
                                                 </div>
@@ -111,7 +119,11 @@
                                 <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
                             </div>
                         </form>
+
                     </div>
+                </div>
+                <div class="card">
+                    <a href="{{ route('simpleWorkflowReport.installer-applications.send-for-complete-profile', $application) }}">ارسال جهت تکمیل پروفایل</a>
                 </div>
             </div>
         </div>
@@ -171,7 +183,8 @@
                     removeInput.value = 1;
                     card.classList.add('border-danger', 'bg-light');
                     card.querySelectorAll('input, textarea').forEach(function(input) {
-                        if (!input.classList.contains('project-id') && !input.classList.contains('project-remove')) {
+                        if (!input.classList.contains('project-id') && !input.classList.contains(
+                                'project-remove')) {
                             input.disabled = true;
                         }
                     });
