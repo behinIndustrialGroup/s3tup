@@ -15,7 +15,7 @@ class FileController extends Controller
         if(!in_array($file->getMimeType(), config('file_control.valid_file_type'))){
             return [
                 'status' => 400,
-                'message' => trans("File Format Is Invalid")
+                'message' => trans("fields.File Format Is Invalid")
             ];
         }
         $name = Str::random(40) . '.' . $file->getClientOriginalExtension();
@@ -28,13 +28,13 @@ class FileController extends Controller
         if($result){
             return [
                 'status' => 200,
-                'message' => trans("File Uploaded"),
+                'message' => trans("fields.File Uploaded"),
                 'dir' => $dir . '/' . $name
             ];
         }
         return [
             'status' => 500,
-            'message' => trans("Error In Uploading File")
+            'message' => trans("fields.Error In Uploading File")
         ];
     }
 }
