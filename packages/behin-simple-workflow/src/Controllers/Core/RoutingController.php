@@ -59,7 +59,7 @@ class RoutingController extends Controller
             }
             if (gettype($value) == 'object') {
                 $result = VariableController::saveFile($processId, $caseId, $key, $value);
-                if($result['status'] != 200){
+                if(is_array($result) && $result['status'] != 200){
                     return [
                         'status' => 400,
                         'msg' => trans('fields.'.$result['message'])
