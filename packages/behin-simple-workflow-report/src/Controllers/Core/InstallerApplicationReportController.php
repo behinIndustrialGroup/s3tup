@@ -153,6 +153,7 @@ class InstallerApplicationReportController extends Controller
         $case->saveVariable('province', $installerApplication->province);
         $case->saveVariable('city', $installerApplication->city);
         $case->saveVariable('description', $installerApplication->description);
+        $case->saveVariable('installer_id', $user->id);
 
         //ارسال پیامک به نصاب جهت تکمیل پروفایل
         SmsController::sendByTemp(
