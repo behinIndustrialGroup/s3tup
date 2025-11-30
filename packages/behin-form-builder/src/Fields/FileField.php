@@ -26,12 +26,18 @@ class FileField extends AbstractField
         } else {
             $s .= '<input type="file" name="' . $this->name . '" ';
             foreach ($this->attributes as $key => $value) {
-                if ($key == 'required') {
-                    if ($value == 'on') {
-                        $s .= 'required ';
+                if ($key != 'value') {
+                    if ($key == 'required') {
+                        if ($value == 'on') {
+                            $s .= 'required ';
+                        }
+                    } elseif ($key == 'readonly') {
+                        if ($value == 'on') {
+                            $s .= 'readonly ';
+                        }
+                    } else {
+                        $s .= $key . '="' . $value . '" ';
                     }
-                } else {
-                    $s .= $key . '="' . $value . '" ';
                 }
             }
             $s .= '>';
