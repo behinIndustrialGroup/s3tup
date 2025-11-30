@@ -43,6 +43,6 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
     Route::resource('installer-applications', InstallerApplicationReportController::class)
         ->only(['index', 'edit', 'update']);
 
-    Route::post('installer-applications/{installerApplication}/send-for-complete-profile', [InstallerApplicationReportController::class, 'sendForCompeleteProfile'])->name('installer-applications.send-for-complete-profile');
+    Route::get('installer-applications/{installerApplication}/send-for-complete-profile', [InstallerApplicationReportController::class, 'sendForCompeleteProfile'])->name('installer-applications.send-for-complete-profile');
 
 });
