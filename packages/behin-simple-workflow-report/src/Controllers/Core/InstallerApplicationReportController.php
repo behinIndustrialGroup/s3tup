@@ -164,7 +164,6 @@ class InstallerApplicationReportController extends Controller
                 'value' => $installerApplication->first_name . ' ' . $installerApplication->last_name,
             ])
         );
-        return $response;
         //حذف ثبت نام نصاب از جدول نصابان
         $installerApplication->delete();
     }
