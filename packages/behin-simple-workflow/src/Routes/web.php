@@ -121,9 +121,9 @@ Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth'])-
     Route::get('view-model/{view_model}/copy', [ViewModelController::class, 'copy'])->middleware(Access::class. ':گردش کار')->name('view-model.copy');
     Route::post('view-model/export', [ViewModelController::class, 'export'])->middleware(Access::class. ':گردش کار')->name('view-model.export');
     Route::post('view-model/import', [ViewModelController::class, 'import'])->middleware(Access::class. ':گردش کار')->name('view-model.import');
-    Route::post('get-view-model-rows', [ViewModelController::class, 'getRows'])->middleware(Access::class. ':گردش کار')->name('view-model.get-rows');
-    Route::post('update-view-model-record', [ViewModelController::class, 'updateRecord'])->middleware(Access::class. ':گردش کار')->name('view-model.update-record');
-    Route::post('delete-view-model-record', [ViewModelController::class, 'deleteRecord'])->middleware(Access::class. ':گردش کار')->name('view-model.delete-record');
+    Route::post('get-view-model-rows', [ViewModelController::class, 'getRows'])->name('view-model.get-rows');
+    Route::post('update-view-model-record', [ViewModelController::class, 'updateRecord'])->name('view-model.update-record');
+    Route::post('delete-view-model-record', [ViewModelController::class, 'deleteRecord'])->name('view-model.delete-record');
 });
 
 Route::get('workflow/process/start/{taskId}/{force?}/{redirect?}/{inDraft?}', [ ProcessController::class, 'start' ])->name('simpleWorkflow.process.start')->middleware('web');
