@@ -122,9 +122,13 @@
 
                     </div>
                 </div>
-                <div class="card">
-                    <a class="btn btn-danger" href="{{ route('simpleWorkflowReport.installer-applications.send-for-complete-profile', $application) }}">ارسال جهت تکمیل پروفایل</a>
-                </div>
+                @if ($installerApplication->sms_sended == 0)
+                    <div class="card">
+                        <a class="btn btn-danger"
+                            href="{{ route('simpleWorkflowReport.installer-applications.send-for-complete-profile', $application) }}">ارسال
+                            جهت تکمیل پروفایل</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

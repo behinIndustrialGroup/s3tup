@@ -171,5 +171,6 @@ class InstallerApplicationReportController extends Controller
         $installerApplication->sms_sended = 1;
         $installerApplication->save();
         // $installerApplication->delete();
+        return redirect()->back();
     }
 }
