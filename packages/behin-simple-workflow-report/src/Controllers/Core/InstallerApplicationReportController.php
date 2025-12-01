@@ -171,6 +171,6 @@ class InstallerApplicationReportController extends Controller
         $installerApplication->sms_sended = 1;
         $installerApplication->save();
         // $installerApplication->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'اطلاعات با موفقیت به‌روزرسانی شد.');
     }
 }
