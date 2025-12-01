@@ -18,6 +18,7 @@ class InstallerApplication extends Model
         'province',
         'city',
         'description',
+        'sms_sended'
     ];
 
     public function profile()

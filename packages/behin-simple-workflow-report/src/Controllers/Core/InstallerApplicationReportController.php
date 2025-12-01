@@ -168,6 +168,8 @@ class InstallerApplicationReportController extends Controller
             ])
         );
         //حذف ثبت نام نصاب از جدول نصابان
-        $installerApplication->delete();
+        $installerApplication->sms_sended = 1;
+        $installerApplication->save();
+        // $installerApplication->delete();
     }
 }
