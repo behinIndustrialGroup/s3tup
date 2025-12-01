@@ -61,7 +61,7 @@ Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth'])-
 
     Route::post('scripts/export', [ScriptController::class, 'export'])->name('scripts.export');
     Route::post('scripts/import', [ScriptController::class, 'import'])->name('scripts.import');
-    Route::resource('scripts', ScriptController::class)->middleware(Access::class. ':گردش کار');
+    Route::resource('scripts', ScriptController::class);
     Route::post('scripts/{id}/test', [ ScriptController::class, 'test' ])->name('scripts.test');
     Route::any('scripts/{id}/run', [ ScriptController::class, 'runFromView' ])->name('scripts.run');
     Route::post('/scripts/autocomplete', [ScriptController::class, 'autocomplete'])->name('scripts.autocomplete');
