@@ -43,18 +43,18 @@ Route::name('simpleWorkflow.')->prefix('workflow')->middleware(['web', 'auth'])-
 
     });
 
-    Route::name('form.')->prefix('form')->middleware(Access::class. ':گردش کار')->group(function(){
-        Route::get('index', [ FormController::class, 'index' ])->name('index');
-        Route::get('edit/{id}', [ FormController::class, 'edit' ])->name('edit');
-        Route::post('update', [ FormController::class, 'update' ])->name('update');
-        Route::get('edit-content/{id}', [ FormController::class, 'editContent' ])->name('editContent');
-        Route::post('updateContent', [ FormController::class, 'updateContent' ])->name('updateContent');
-        Route::get('edit-script/{id}', [ FormController::class, 'editScript' ])->name('editScript');
-        Route::post('updateScript', [ FormController::class, 'updateScript' ])->name('updateScript');
-        Route::post('store', [ FormController::class, 'store' ])->name('store');
-        Route::post('create', [ FormController::class, 'createForm' ])->name('create');
-        Route::post('copy', [ FormController::class, 'copy' ])->name('copy');
-        Route::post('delete', [ FormController::class, 'delete' ])->name('delete');
+    Route::name('form.')->prefix('form')->group(function(){
+        Route::get('index', [ FormController::class, 'index' ])->name('index')->middleware(Access::class. ':گردش کار');
+        Route::get('edit/{id}', [ FormController::class, 'edit' ])->name('edit')->middleware(Access::class. ':گردش کار');
+        Route::post('update', [ FormController::class, 'update' ])->name('update')->middleware(Access::class. ':گردش کار');
+        Route::get('edit-content/{id}', [ FormController::class, 'editContent' ])->name('editContent')->middleware(Access::class. ':گردش کار');
+        Route::post('updateContent', [ FormController::class, 'updateContent' ])->name('updateContent')->middleware(Access::class. ':گردش کار');
+        Route::get('edit-script/{id}', [ FormController::class, 'editScript' ])->name('editScript')->middleware(Access::class. ':گردش کار');
+        Route::post('updateScript', [ FormController::class, 'updateScript' ])->name('updateScript')->middleware(Access::class. ':گردش کار');
+        Route::post('store', [ FormController::class, 'store' ])->name('store')->middleware(Access::class. ':گردش کار');
+        Route::post('create', [ FormController::class, 'createForm' ])->name('create')->middleware(Access::class. ':گردش کار');
+        Route::post('copy', [ FormController::class, 'copy' ])->name('copy')->middleware(Access::class. ':گردش کار');
+        Route::post('delete', [ FormController::class, 'delete' ])->name('delete')->middleware(Access::class. ':گردش کار');
         Route::post('open/{form_id}', [ FormController::class, 'open' ])->name('open');
         Route::post('open-create-new/{form_id}', [ FormController::class, 'openCreateNew' ])->name('open');
     });
