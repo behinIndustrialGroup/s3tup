@@ -67,7 +67,7 @@
                 </div>
                 <div class="flex-1 w-full">
                     <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-900">اطلاعات شرکت صنعتی</h2>
+                        <h2 class="text-xl font-semibold mb-4 text-gray-900">متقاضی صنعتی</h2>
                         <p class="text-sm text-gray-600 mb-6">لطفاً اطلاعات خود را وارد کنید؛ کارشناسان ما در اسرع وقت جهت
                             هماهنگی و عقد قرارداد با شما تماس خواهند گرفت.</p>
                         @if (session('status'))
