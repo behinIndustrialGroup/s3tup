@@ -31,6 +31,7 @@ class StoreIndustryRegistrationRequest extends FormRequest
             'province' => ['required', 'string', 'max:100'],
             'address' => ['required', 'string', 'max:500'],
             'requested_capacity' => ['nullable', 'string', 'max:100'],
+            'industry_ministry_code' => ['nullable', 'string', 'max:100'],
             'description' => ['nullable', 'string', 'max:2000'],
         ];
     }
@@ -47,6 +48,7 @@ class StoreIndustryRegistrationRequest extends FormRequest
             'province' => 'استان',
             'address' => 'آدرس',
             'requested_capacity' => 'ظرفیت درخواستی',
+            'industry_ministry_code' => 'کد دریافتی از وزارت صنعت',
             'description' => 'توضیحات',
         ];
     }
