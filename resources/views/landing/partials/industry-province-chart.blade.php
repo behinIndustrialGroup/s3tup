@@ -9,9 +9,8 @@
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
                 <h2 class="text-xl font-bold text-gray-900">تعداد ثبت‌نام صنایع به تفکیک استان</h2>
-                <p class="text-sm text-gray-600 mt-1">اعداد ابتدا از فایل کانفیگ خوانده می‌شوند و در صورت عدم وجود، از ثبت‌نام‌های ثبت شده استخراج می‌شوند.</p>
             </div>
-            <div class="text-xs text-gray-500 bg-sky-50 text-sky-800 px-3 py-1 rounded-full border border-sky-100">به‌روزرسانی خودکار با ثبت‌های جدید</div>
+            {{-- <div class="text-xs text-gray-500 bg-sky-50 text-sky-800 px-3 py-1 rounded-full border border-sky-100">به‌روزرسانی خودکار با ثبت‌های جدید</div> --}}
         </div>
         <div class="mt-6" style="min-height: 320px;">
             <canvas id="{{ $chartId }}" class="w-full h-full"></canvas>
