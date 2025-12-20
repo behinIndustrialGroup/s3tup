@@ -20,6 +20,7 @@ class IndustryRegistration extends Model
         'province',
         'address',
         'requested_capacity',
+        'industry_ministry_code',
         'description',
     ];
 }

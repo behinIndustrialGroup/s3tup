@@ -121,6 +121,10 @@
                                     <label class="block text-sm font-medium text-gray-700">ظرفیت درخواستی (اختیاری)</label>
                                     <input type="text" name="requested_capacity" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="مثال: 500 کیلووات">
                                 </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">کد دریافتی از وزارت صنعت جهت ثبت نام (اختیاری)</label>
+                                    <input type="text" name="industry_ministry_code" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="در صورت داشتن کد از وزارت صنعت وارد کنید">
+                                </div>
                                 <div class="space-y-2 md:col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">توضیحات (اختیاری)</label>
                                     <textarea name="description" rows="4" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="جزئیات مربوط به مصرف فعلی، فضای نصب یا محدودیت‌های سایت را ذکر کنید."></textarea>
