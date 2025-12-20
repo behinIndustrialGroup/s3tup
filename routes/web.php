@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IndustryRegistrationController;
 use App\Http\Controllers\InstallerRegistrationController;
 use App\Models\User;
 use BaleBot\Controllers\BotController;
@@ -26,6 +27,8 @@ Route::get('', function(){
 
 Route::get('landing/sme-registration', [SmeRegistrationController::class, 'create'])->name('landing.sme-registration');
 Route::post('landing/sme-registration', [SmeRegistrationController::class, 'store'])->name('landing.sme-registration');
+Route::get('landing/industry-registration', [IndustryRegistrationController::class, 'create'])->name('landing.industry-registration');
+Route::post('landing/industry-registration', [IndustryRegistrationController::class, 'store'])->name('landing.industry-registration.submit');
 
 Route::get('installers/apply', [InstallerRegistrationController::class, 'create'])->name('installers.apply');
 Route::post('installers/apply', [InstallerRegistrationController::class, 'store'])->name('installers.store');
@@ -97,6 +100,3 @@ Route::get('build-app', function(){
     Artisan::call('migrate');
     return redirect()->back();
 });
-
-
-
