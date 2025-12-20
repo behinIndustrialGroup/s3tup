@@ -146,6 +146,10 @@
     </header>
 
     <main class="container px-6 py-12 space-y-16">
+        @if (!empty($provinceCounts))
+            @include('landing.partials.industry-province-chart', ['provinceCounts' => $provinceCounts])
+        @endif
+
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white rounded-xl shadow p-6">
                 <h3 class="font-semibold text-lg mb-3">پایداری خطوط تولید</h3>

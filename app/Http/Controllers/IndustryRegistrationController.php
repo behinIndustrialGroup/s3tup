@@ -12,7 +12,9 @@ class IndustryRegistrationController extends Controller
 {
     public function create(): View
     {
-        return view('landing.industry-registration');
+        $provinceCounts = $this->resolveProvinceCounts();
+
+        return view('landing.industry-registration', compact('provinceCounts'));
     }
 
     public function store(StoreIndustryRegistrationRequest $request): RedirectResponse
@@ -38,5 +40,17 @@ class IndustryRegistrationController extends Controller
         return redirect()
             ->route('landing.industry-registration')
             ->with('status', 'درخواست شما با موفقیت ثبت شد. همکاران ما به زودی با شما تماس می‌گیرند.');
+    }
+
+    private function resolveProvinceCounts(): array
+    {
+        $provinceConfig = collect(config('industry_provinces.provinces', []));
+        $databaseCounts = IndustryRegistration::selectRaw('province, COUNT(*) as aggregate')
+            ->groupBy('province')
+            ->pluck('aggregate', 'province');
+
+        return $provinceConfig
+            ->map(fn (?int $override, string $province): int => $override ?? (int) ($databaseCounts[$province] ?? 0))
+            ->toArray();
     }
 }
