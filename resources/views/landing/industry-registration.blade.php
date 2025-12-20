@@ -90,7 +90,7 @@
                                     <input type="text" name="company_name" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" required>
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">کد دریافتی از وزارت صنعت (اختیاری)</label>
+                                    <label class="block text-sm font-medium text-gray-700">کد دریافتی از وزارت صمت (اختیاری)</label>
                                     <input type="text" name="industry_ministry_code" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="در صورت داشتن کد از وزارت صنعت وارد کنید">
                                 </div>
                                 <div class="space-y-2">
