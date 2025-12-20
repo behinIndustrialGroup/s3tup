@@ -67,7 +67,7 @@
                 </div>
                 <div class="flex-1 w-full">
                     <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-900">اطلاعات شرکت صنعتی</h2>
+                        <h2 class="text-xl font-semibold mb-4 text-gray-900">متقاضی صنعتی</h2>
                         <p class="text-sm text-gray-600 mb-6">لطفاً اطلاعات خود را وارد کنید؛ کارشناسان ما در اسرع وقت جهت
                             هماهنگی و عقد قرارداد با شما تماس خواهند گرفت.</p>
                         @if (session('status'))
@@ -88,6 +88,10 @@
                                 <div class="space-y-2">
                                     <label class="block text-sm font-medium text-gray-700">نام شرکت</label>
                                     <input type="text" name="company_name" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">کد دریافتی از وزارت صنعت (اختیاری)</label>
+                                    <input type="text" name="industry_ministry_code" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="در صورت داشتن کد از وزارت صنعت وارد کنید">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="block text-sm font-medium text-gray-700">نام مدیرعامل</label>
@@ -121,10 +125,7 @@
                                     <label class="block text-sm font-medium text-gray-700">ظرفیت درخواستی (اختیاری)</label>
                                     <input type="text" name="requested_capacity" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="مثال: 500 کیلووات">
                                 </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">کد دریافتی از وزارت صنعت جهت ثبت نام (اختیاری)</label>
-                                    <input type="text" name="industry_ministry_code" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="در صورت داشتن کد از وزارت صنعت وارد کنید">
-                                </div>
+                                
                                 <div class="space-y-2 md:col-span-2">
                                     <label class="block text-sm font-medium text-gray-700">توضیحات (اختیاری)</label>
                                     <textarea name="description" rows="4" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="جزئیات مربوط به مصرف فعلی، فضای نصب یا محدودیت‌های سایت را ذکر کنید."></textarea>
