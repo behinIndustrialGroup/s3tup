@@ -30,11 +30,9 @@
         <div class="container px-6 py-12">
             <div class="flex flex-col md:flex-row items-center gap-8">
                 <div class="flex-1">
-                    <div class="flex items-center gap-3 mb-4">
-                        <img src="{{ url('behin/logo.png') }}" alt="لوگو S3TUP" class="h-10 md:h-12 object-contain">
-                        <span class="text-sm font-semibold text-gray-500">
-                            پلتفرم جامع انرژی خورشیدی
-                        </span>
+                    <div class="flex flex-col items-center mb-8 space-y-3 text-center">
+                        <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
+                            class="h-28 md:h-32 object-contain">
                     </div>
                     <h1 class="text-3xl md:text-4xl font-bold mb-3">پلتفرم S3TUP؛ آینده انرژی در دستان شما ⚡️☀️</h1>
                     <p class="mb-6 text-lg md:text-xl leading-relaxed">
