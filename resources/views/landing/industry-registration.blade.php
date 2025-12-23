@@ -253,10 +253,12 @@
                     تلفات ناشی از خاموشی را کاهش دهد.</p>
             </div>
             <div class="bg-white rounded-xl shadow p-6">
-                <h3 class="font-semibold text-lg mb-3">رعایت استانداردهای محیط‌زیستی</h3>
-                <p class="text-sm text-gray-600 leading-6">استفاده از انرژی پاک به کاهش آلایندگی کمک کرده و در اخذ
-                    گواهی‌های
-                    زیست‌محیطی و مسئولیت اجتماعی شرکت نقش دارد.</p>
+                <h3 class="font-semibold text-lg mb-3">
+                    تامین مالی
+                </h3>
+                <p class="text-sm text-gray-600 leading-6">
+                    ایجاد امکان بهره مندی از تسهیلات مالی برای احداث نیروگاه خورشیدی
+                </p>
             </div>
         </section>
 
