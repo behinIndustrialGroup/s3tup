@@ -57,29 +57,50 @@
                             برق پایدار برای کارخانه شما
                         </h1>
                         <h2 class="mt-4 text-xl md:text-2xl font-bold leading-tight">
-                            خورسیدی + ذخیره ساز: برای حذف خاموشی خطوط حیاتی تولید
+                            خورسیدی + ذخیره ساز = حذف خاموشی خطوط حیاتی تولید
                         </h2>
                     </div>
                     <p class="text-lg md:text-xl leading-8">
-                        اگر قطعی برق باعث توقف تولید، خسارت مالی یا از بین رفتن مواد اولیه می شود، راهکار هیبرید 
+                        اگر قطعی برق باعث توقف تولید، خسارت مالی یا از بین رفتن مواد اولیه می شود، راهکار هیبرید
                         خورشیدی + باتری، برق پایدار داخلی مجموعه را تامین می کند.
                     </p>
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm md:text-base">
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
-                            <span>تامین برق پایدار خطوط تولید و جلوگیری از توقف عملیات</span>
+                            <span>
+                                <span class="font-bold">
+                                    حذف خاموشی خطوط حیاتی تولید
+                                </span><br>
+                                در زمان قطع برق شبکه، اینورتر هیبرید و ذخیره‌ساز، برق مورد نیاز تجهیزات حیاتی را بدون
+                                وقفه تأمین می‌کنند.
+                            </span>
                         </li>
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
-                            <span>بهینه‌سازی هزینه انرژی با فروش برق مازاد یا مدیریت اوج مصرف</span>
+                            <span>
+                                <span class="font-bold">
+                                    جلوگیری از توقف تولید و خسارت مالی
+                                </span><br>
+                                حذف خاموشی به معنی حذف توقف خط، دوباره‌کاری، و آسیب به تجهیزات حساس است
+                            </span>
                         </li>
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
-                            <span>هم‌سویی با الزامات زیست‌محیطی و کاهش ردپای کربنی</span>
+                            <span>
+                                <span class="font-bold">
+                                    کاهش هزینه انرژی و مدیریت اوج مصرف
+                                </span><br>
+                                تولید خورشیدی و ذخیره‌سازی انرژی، مصرف پیک را کنترل و هزینه برق را کاهش می‌دهد
+                            </span>
                         </li>
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
-                            <span>پشتیبانی فنی و مالی از امکان‌سنجی تا اجرا و نگهداری</span>
+                            <span>
+                                <span class="font-bold">
+                                    همسویی با الزامات زیست‌محیطی و ESG
+                                </span><br>
+                                کاهش ردپای کربنی و بهبود جایگاه برند صنعتی در زنجیره تأمین و صادرات
+                            </span>
                         </li>
                     </ul>
                 </div>
