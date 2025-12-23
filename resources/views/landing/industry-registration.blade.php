@@ -38,7 +38,7 @@
                                 class="h-20 md:h-24 object-contain">
                         </div>
 
-                        <h2 class="text-sm md:text-base font-semibold text-slate-600">
+                        <h2 class="mt-4 text-3xl md:text-4xl font-bold leading-tight">
                             ستاپ، پلتفرم مورد تأیید وزارت صنعت، معدن و تجارت
                         </h2>
                     </div>
