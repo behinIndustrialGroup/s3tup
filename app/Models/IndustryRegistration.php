@@ -12,15 +12,23 @@ class IndustryRegistration extends Model
 
     protected $fillable = [
         'company_name',
-        'ceo_firstname',
-        'ceo_lastname',
-        'ceo_mobile',
-        'representative_fullname',
-        'representative_mobile',
-        'province',
-        'address',
-        'requested_capacity',
+        'economic_code',
         'industry_ministry_code',
+        'industry_type',
+        'contact_name',
+        'contact_position',
+        'mobile',
+        'email',
+        'province',
+        'city',
+        'address',
+        'voltage_level',
+        'demand_kw',
+        'goals',
         'description',
+    ];
+
+    protected $casts = [
+        'goals' => 'array',
     ];
 }

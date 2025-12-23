@@ -23,15 +23,20 @@ class StoreIndustryRegistrationRequest extends FormRequest
     {
         return [
             'company_name' => ['required', 'string', 'max:255'],
-            'ceo_firstname' => ['required', 'string', 'max:100'],
-            'ceo_lastname' => ['required', 'string', 'max:100'],
-            'ceo_mobile' => ['required', 'string', 'max:32', 'unique:industry_registrations,ceo_mobile'],
-            'representative_fullname' => ['nullable', 'string', 'max:200'],
-            'representative_mobile' => ['nullable', 'string', 'max:32', 'unique:industry_registrations,representative_mobile'],
-            'province' => ['required', 'string', 'max:100'],
-            'address' => ['required', 'string', 'max:500'],
-            'requested_capacity' => ['nullable', 'string', 'max:100'],
+            'economic_code' => ['nullable', 'string', 'max:100'],
             'industry_ministry_code' => ['nullable', 'string', 'max:100'],
+            'industry_type' => ['required', 'string', 'max:150'],
+            'contact_name' => ['required', 'string', 'max:150'],
+            'contact_position' => ['required', 'string', 'max:100'],
+            'mobile' => ['required', 'string', 'max:32'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'province' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:150'],
+            'address' => ['required', 'string', 'max:500'],
+            'voltage_level' => ['required', 'string', 'max:50'],
+            'demand_kw' => ['nullable', 'string', 'max:100'],
+            'goals' => ['required', 'array', 'min:1'],
+            'goals.*' => ['string', 'in:prevent_outage,stable_power,cost_reduction,peak_management,environment'],
             'description' => ['nullable', 'string', 'max:2000'],
         ];
     }
@@ -40,16 +45,31 @@ class StoreIndustryRegistrationRequest extends FormRequest
     {
         return [
             'company_name' => 'نام شرکت',
-            'ceo_firstname' => 'نام مدیرعامل',
-            'ceo_lastname' => 'نام خانوادگی مدیرعامل',
-            'ceo_mobile' => 'شماره موبایل مدیرعامل',
-            'representative_fullname' => 'نام نماینده',
-            'representative_mobile' => 'شماره موبایل نماینده',
+            'economic_code' => 'شناسه ملی / کد اقتصادی',
+            'industry_ministry_code' => 'کد دریافتی از وزارت صمت',
+            'industry_type' => 'حوزه فعالیت صنعتی',
+            'contact_name' => 'نام و نام خانوادگی',
+            'contact_position' => 'سمت سازمانی',
+            'mobile' => 'شماره موبایل',
+            'email' => 'ایمیل',
             'province' => 'استان',
-            'address' => 'آدرس',
-            'requested_capacity' => 'ظرفیت درخواستی',
-            'industry_ministry_code' => 'کد دریافتی از وزارت صنعت',
+            'city' => 'شهر / شهرستان',
+            'address' => 'نشانی دقیق',
+            'voltage_level' => 'سطح ولتاژ برق',
+            'demand_kw' => 'دیماند قراردادی',
+            'goals' => 'هدف اصلی پروژه',
             'description' => 'توضیحات',
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $mobile = $this->input('mobile');
+        $demandKw = $this->input('demand_kw');
+
+        $this->merge([
+            'mobile' => $mobile !== null ? convertPersianToEnglish($mobile) : null,
+            'demand_kw' => $demandKw !== null ? convertPersianToEnglish($demandKw) : null,
+        ]);
     }
 }
