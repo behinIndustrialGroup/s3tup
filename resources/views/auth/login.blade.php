@@ -30,6 +30,12 @@
         <div class="container px-6 py-12">
             <div class="flex flex-col md:flex-row items-center gap-8">
                 <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="{{ url('behin/logo.png') }}" alt="لوگو S3TUP" class="h-10 md:h-12 object-contain">
+                        <span class="text-sm font-semibold text-gray-500">
+                            پلتفرم جامع انرژی خورشیدی
+                        </span>
+                    </div>
                     <h1 class="text-3xl md:text-4xl font-bold mb-3">پلتفرم S3TUP؛ آینده انرژی در دستان شما ⚡️☀️</h1>
                     <p class="mb-6 text-lg md:text-xl leading-relaxed">
                         به دنیای S3TUP خوش آمدید؛ جایی که رویای شما برای ساخت نیروگاه خورشیدی در کوتاه‌ترین زمان و
