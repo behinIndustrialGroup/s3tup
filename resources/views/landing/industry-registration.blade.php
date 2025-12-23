@@ -32,18 +32,17 @@
 
 
                 <div class="flex-1 space-y-6">
-                    <div class="flex flex-col items-start mb-8 space-y-3">
-                        <div class="flex justify-center mb-8" style="width: 100%">
-                            <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
-                                class="h-25 md:h-28 object-contain">
-                        </div>
+                    <div class="flex flex-col items-center mb-8 space-y-3 text-center">
+                        <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
+                            class="h-24 md:h-28 object-contain">
 
-                        <h2 class="mt-4 text-3xl md:text-4xl font-bold leading-tight flex justify-center">
+                        <h2 class="text-3xl md:text-4xl font-bold leading-tight">
                             ستاپ
                             <br>
-                         پلتفرم مورد تأیید وزارت نیرو
+                            پلتفرم مورد تأیید وزارت نیرو
                         </h2>
                     </div>
+
                     <div>
                         <span
                             class="inline-flex items-center gap-2 bg-white/70 text-sky-800 px-4 py-1 rounded-full text-sm font-semibold">
