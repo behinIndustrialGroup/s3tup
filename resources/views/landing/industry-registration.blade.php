@@ -33,13 +33,14 @@
 
                 <div class="flex-1 space-y-6">
                     <div class="flex flex-col items-start mb-8 space-y-3">
-                        <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
-                            class="h-14 md:h-16 object-contain">
+                        <div class="flex justify-center mb-8">
+                            <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
+                                class="h-20 md:h-24 object-contain">
+                        </div>
 
-                        <span
-                            class="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
-                            پلتفرم مورد تأیید وزارت صنعت، معدن و تجارت
-                        </span>
+                        <h2 class="text-sm md:text-base font-semibold text-slate-600">
+                            ستاپ، پلتفرم مورد تأیید وزارت صنعت، معدن و تجارت
+                        </h2>
                     </div>
                     <div>
                         <span
