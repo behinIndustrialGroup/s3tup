@@ -22,10 +22,14 @@ class SmeRegistrationController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $mobile = convertPersianToEnglish($request->mobile);
-        $user = User::create([
-            'mobile' => $mobile,
-            'password' => Hash::make(rand(100000, 999999)),
-        ]);
+        $user = User::where('email', $mobile)->first();
+        if (!$user) {
+            $user = User::create([
+                'mobile' => $mobile,
+                'password' => Hash::make(rand(100000, 999999)),
+            ]);
+        }
+
         $inbox = ProcessController::start(
             "c1462858-5560-431d-a8c0-f0239038bde7",
             $user->id,
