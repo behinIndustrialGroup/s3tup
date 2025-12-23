@@ -113,7 +113,7 @@
                                 <span class="font-bold">
                                     بعد از ثبت نام چه چیزی دریافت میکنید
                                 </span><br>
-                               ✔ ارزیابی فنی اولیه محل نیروگاه <br>
+                                ✔ ارزیابی فنی اولیه محل نیروگاه <br>
                                 ✔ پیشنهاد ظرفیت نیروگاه خورشیدی <br>
                                 ✔ سناریوی ذخیره‌ساز برای حذف خاموشی <br>
                                 ✔ برآورد هزینه، زمان اجرا و مراحل مجوز <br>
@@ -141,88 +141,185 @@
                                 @endforeach
                             </div>
                         @endif
-                        <form id="registration-form" class="space-y-4" method="POST"
+                        <form id="registration-form" class="space-y-6" method="POST"
                             action="{{ route('landing.industry-registration.submit') }}">
                             @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">نام شرکت</label>
-                                    <input type="text" name="company_name"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        required>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">کد دریافتی از وزارت صمت
-                                        (اختیاری)</label>
-                                    <input type="text" name="industry_ministry_code"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="در صورت داشتن کد از وزارت صمت وارد کنید">
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">نام مدیرعامل</label>
-                                    <input type="text" name="ceo_firstname"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        required>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">نام خانوادگی مدیرعامل</label>
-                                    <input type="text" name="ceo_lastname"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        required>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">شماره موبایل مدیرعامل</label>
-                                    <input type="tel" name="ceo_mobile" dir="ltr" inputmode="numeric"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="09xxxxxxxxx" required>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">نام و نام خانوادگی نماینده
-                                        (اختیاری)</label>
-                                    <input type="text" name="representative_fullname"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="در صورت پیگیری توسط نماینده">
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">موبایل نماینده
-                                        (اختیاری)</label>
-                                    <input type="tel" name="representative_mobile" dir="ltr"
-                                        inputmode="numeric"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="09xxxxxxxxx">
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">استان</label>
-                                    <input type="text" name="province"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="مثال: اصفهان" required>
-                                </div>
-                                <div class="space-y-2 md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700">آدرس</label>
-                                    <input type="text" name="address"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="نشانی دقیق محل کارخانه یا سایت صنعتی" required>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">ظرفیت درخواستی
-                                        (اختیاری)</label>
-                                    <input type="text" name="requested_capacity"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="مثال: 500 کیلووات">
-                                </div>
 
-                                <div class="space-y-2 md:col-span-2">
-                                    <label class="block text-sm font-medium text-gray-700">توضیحات (اختیاری)</label>
-                                    <textarea name="description" rows="4"
-                                        class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                                        placeholder="جزئیات مربوط به مصرف فعلی، فضای نصب یا محدودیت‌های سایت را ذکر کنید."></textarea>
+                            <!-- عنوان فرم -->
+                            <div class="text-center space-y-2">
+                                <h2 class="text-2xl md:text-3xl font-bold">
+                                    درخواست بررسی تأمین برق پایدار و جلوگیری از خاموشی
+                                </h2>
+                                <p class="text-sm text-gray-600">
+                                    لطفاً اطلاعات زیر را تکمیل فرمایید. کارشناسان ما پس از بررسی اولیه با شما تماس
+                                    خواهند گرفت.
+                                </p>
+                            </div>
+
+                            <!-- بخش ۱: اطلاعات واحد صنعتی -->
+                            <div class="space-y-4">
+                                <h3 class="font-semibold text-lg border-b pb-1">اطلاعات واحد صنعتی</h3>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium">نام شرکت / واحد صنعتی *</label>
+                                        <input type="text" name="company_name" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">شناسه ملی / کد اقتصادی
+                                            (اختیاری)</label>
+                                        <input type="text" name="economic_code"
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">کد دریافتی از وزارت صمت
+                                            (اختیاری)</label>
+                                        <input type="text" name="industry_ministry_code"
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">حوزه فعالیت صنعتی *</label>
+                                        <select name="industry_type" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                            <option value="">انتخاب کنید</option>
+                                            <option>فولاد و فلزات</option>
+                                            <option>سیمان و مصالح</option>
+                                            <option>صنایع غذایی</option>
+                                            <option>نساجی</option>
+                                            <option>پتروشیمی و شیمیایی</option>
+                                            <option>پلاستیک و پلیمر</option>
+                                            <option>سردخانه و انبار</option>
+                                            <option>معادن</option>
+                                            <option>سایر</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- بخش ۲: اطلاعات شخص تماس -->
+                            <div class="space-y-4">
+                                <h3 class="font-semibold text-lg border-b pb-1">اطلاعات شخص تماس</h3>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium">نام و نام خانوادگی *</label>
+                                        <input type="text" name="contact_name" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">سمت سازمانی *</label>
+                                        <select name="contact_position" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                            <option value="">انتخاب کنید</option>
+                                            <option>مدیرعامل</option>
+                                            <option>مدیر فنی</option>
+                                            <option>مدیر تولید</option>
+                                            <option>مدیر تاسیسات</option>
+                                            <option>مسئول انرژی</option>
+                                            <option>سایر</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">شماره موبایل *</label>
+                                        <input type="tel" name="mobile" required dir="ltr"
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500"
+                                            placeholder="09xxxxxxxxx">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">ایمیل سازمانی (اختیاری)</label>
+                                        <input type="email" name="email"
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- بخش ۳: موقعیت جغرافیایی -->
+                            <div class="space-y-4">
+                                <h3 class="font-semibold text-lg border-b pb-1">موقعیت جغرافیایی</h3>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium">استان *</label>
+                                        <input type="text" name="province" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">شهر / شهرستان *</label>
+                                        <input type="text" name="city" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium">نشانی دقیق *</label>
+                                        <input type="text" name="address" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- بخش ۴: وضعیت برق -->
+                            <div class="space-y-4">
+                                <h3 class="font-semibold text-lg border-b pb-1">وضعیت برق و مصرف انرژی</h3>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium">سطح ولتاژ برق *</label>
+                                        <select name="voltage_level" required
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                            <option>فشار ضعیف (LV)</option>
+                                            <option>فشار متوسط (MV)</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-sm font-medium">دیماند قراردادی (kW)</label>
+                                        <input type="text" name="demand_kw"
+                                            class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- بخش ۵: هدف پروژه -->
+                            <div class="space-y-4">
+                                <h3 class="font-semibold text-lg border-b pb-1">هدف اصلی پروژه *</h3>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                                    <label><input type="checkbox" name="goals[]" value="prevent_outage"> جلوگیری از
+                                        خاموشی</label>
+                                    <label><input type="checkbox" name="goals[]" value="stable_power"> تأمین برق
+                                        پایدار</label>
+                                    <label><input type="checkbox" name="goals[]" value="cost_reduction"> کاهش هزینه
+                                        برق</label>
+                                    <label><input type="checkbox" name="goals[]" value="peak_management"> مدیریت اوج
+                                        مصرف</label>
+                                    <label><input type="checkbox" name="goals[]" value="environment"> الزامات
+                                        زیست‌محیطی</label>
+                                </div>
+                            </div>
+
+                            <!-- توضیحات -->
+                            <div>
+                                <label class="block text-sm font-medium">توضیحات تکمیلی (اختیاری)</label>
+                                <textarea name="description" rows="4"
+                                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-sky-500"></textarea>
+                            </div>
+
+
+                            <!-- دکمه ارسال -->
                             <button type="submit"
-                                class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold shadow hover:bg-gray-800 transition">
-                                ارسال درخواست و دریافت مشاوره تخصصی
+                                class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
+                                ثبت درخواست و دریافت بررسی تخصصی
                             </button>
                         </form>
+
                         <p class="text-xs text-gray-500 mt-4">
                             اطلاعات وارد شده در این فرم تنها برای تماس کارشناسان ستاپ استفاده خواهد شد و در هیچ پایگاه
                             داده‌ای ذخیره
