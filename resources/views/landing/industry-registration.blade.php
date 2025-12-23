@@ -29,16 +29,18 @@
     <header class="bg-gradient-to-l from-sky-400 via-blue-300 to-emerald-300 text-gray-900">
         <div class="container px-6 py-12">
             <div class="flex flex-col md:flex-row gap-10 items-center">
-                <div class="flex flex-col items-start mb-8 space-y-3">
-                    <img src="/{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ" class="h-14 md:h-16 object-contain">
 
-                    <span
-                        class="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
-                        پلتفرم مورد تأیید وزارت صنعت، معدن و تجارت
-                    </span>
-                </div>
 
                 <div class="flex-1 space-y-6">
+                    <div class="flex flex-col items-start mb-8 space-y-3">
+                        <img src="{{ url('public/behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
+                            class="h-14 md:h-16 object-contain">
+
+                        <span
+                            class="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+                            پلتفرم مورد تأیید وزارت صنعت، معدن و تجارت
+                        </span>
+                    </div>
                     <div>
                         <span
                             class="inline-flex items-center gap-2 bg-white/70 text-sky-800 px-4 py-1 rounded-full text-sm font-semibold">
