@@ -38,8 +38,10 @@
                                 class="h-25 md:h-28 object-contain">
                         </div>
 
-                        <h2 class="mt-4 text-3xl md:text-4xl font-bold leading-tight">
-                            ستاپ، پلتفرم مورد تأیید وزارت نیرو
+                        <h2 class="mt-4 text-3xl md:text-4xl font-bold leading-tight flex justify-center">
+                            ستاپ
+                            <br>
+                         پلتفرم مورد تأیید وزارت نیرو
                         </h2>
                     </div>
                     <div>
