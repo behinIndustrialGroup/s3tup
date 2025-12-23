@@ -58,7 +58,7 @@
                     <p class="text-md text-amber-900 font-bold mb-6">💡 امروز انتخاب کنید؛ فردا انرژی پاک و سودآور در
                         اختیار شماست.</p>
 
-                    <div class="flex flex-wrap gap-3">
+                    <div class="flex flex-wrap gap-3 mb-2">
                         <!-- فرم لاگین -->
                         <form id="login-form" method="POST" action="{{ route('otp.send') }}"
                             class="flex flex-col sm:flex-row sm:items-center gap-2 bg-white p-3 rounded-lg shadow w-full">
@@ -73,7 +73,8 @@
                     </div>
 
                     <!-- stats -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- ثبت‌نام نصاب‌ها -->
                         <a href="{{ route('installers.apply') }}"
                             class="group block p-4 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 transition-all duration-300 text-center shadow-sm hover:shadow-md">
                             <div class="flex flex-col items-center">
@@ -86,6 +87,7 @@
                             </div>
                         </a>
 
+                        <!-- ثبت‌نام اصناف -->
                         <a href="{{ route('landing.sme-registration') }}"
                             class="group block p-4 rounded-lg border border-yellow-300 bg-yellow-50 hover:bg-yellow-100 transition-all duration-300 text-center shadow-sm hover:shadow-md">
                             <div class="flex flex-col items-center">
@@ -97,7 +99,23 @@
                                 <div class="text-xs text-gray-600 mt-1">تامین برق پایدار واحدهای صنفی</div>
                             </div>
                         </a>
+
+                        <!-- ثبت‌نام صنایع -->
+                        <a href="{{ route('landing.industry-registration') }}"
+                            class="group block p-4 rounded-lg border border-sky-300 bg-sky-50 hover:bg-sky-100 transition-all duration-300 text-center shadow-sm hover:shadow-md">
+                            <div class="flex flex-col items-center">
+                                <div
+                                    class="bg-sky-400 text-white p-2 rounded-full mb-2 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid fa-industry text-xl"></i>
+                                </div>
+                                <div class="font-bold text-gray-800">ثبت‌نام صنایع</div>
+                                <div class="text-xs text-gray-600 mt-1">
+                                    احداث نیروگاه خورشیدی و ذخیره‌سازی انرژی
+                                </div>
+                            </div>
+                        </a>
                     </div>
+
                 </div>
 
                 <div class="flex-1">
