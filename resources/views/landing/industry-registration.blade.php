@@ -57,7 +57,7 @@
                             برق پایدار برای کارخانه شما
                         </h1>
                         <h2 class="mt-4 text-xl md:text-2xl font-bold leading-tight">
-                            خورسیدی + ذخیره ساز = حذف خاموشی خطوط حیاتی تولید
+                            خورشیدی + ذخیره ساز = حذف خاموشی خطوط حیاتی تولید
                         </h2>
                     </div>
                     <p class="text-lg md:text-xl leading-8">
