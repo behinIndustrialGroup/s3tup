@@ -34,7 +34,7 @@
                 <div class="flex-1 space-y-6">
                     <div class="flex flex-col items-center mb-8 space-y-3 text-center">
                         <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
-                            class="h-24 md:h-28 object-contain">
+                            class="h-28 md:h-32 object-contain">
 
                         <h2 class="text-3xl md:text-4xl font-bold leading-tight">
                             ستاپ
