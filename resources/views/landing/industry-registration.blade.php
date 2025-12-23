@@ -33,7 +33,7 @@
 
                 <div class="flex-1 space-y-6">
                     <div class="flex flex-col items-start mb-8 space-y-3">
-                        <img src="{{ url('public/behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
+                        <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
                             class="h-14 md:h-16 object-contain">
 
                         <span
