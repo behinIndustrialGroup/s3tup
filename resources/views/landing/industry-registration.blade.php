@@ -145,17 +145,6 @@
                             action="{{ route('landing.industry-registration.submit') }}">
                             @csrf
 
-                            <!-- عنوان فرم -->
-                            <div class="text-center space-y-2">
-                                <h2 class="text-2xl md:text-3xl font-bold">
-                                    درخواست بررسی تأمین برق پایدار و جلوگیری از خاموشی
-                                </h2>
-                                <p class="text-sm text-gray-600">
-                                    لطفاً اطلاعات زیر را تکمیل فرمایید. کارشناسان ما پس از بررسی اولیه با شما تماس
-                                    خواهند گرفت.
-                                </p>
-                            </div>
-
                             <!-- بخش ۱: اطلاعات واحد صنعتی -->
                             <div class="space-y-4">
                                 <h3 class="font-semibold text-lg border-b pb-1">اطلاعات واحد صنعتی</h3>
