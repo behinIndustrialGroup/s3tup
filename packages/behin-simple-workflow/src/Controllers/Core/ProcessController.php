@@ -117,14 +117,14 @@ class ProcessController extends Controller
         }elseif(Auth::check()){
             $creator = Auth::user()->id;
         }else{
-            $ip = request()->ip();
-            $tempUser = User::create([
-                'name' => $ip,
-                'email' => $ip.'-'.Str::random(5).'@temp.local',
-                'password' => Hash::make(Str::random(16)),
-            ]);
-            $creator = $tempUser->id;
-            Auth::login($tempUser);
+            // $ip = request()->ip();
+            // $tempUser = User::create([
+            //     'name' => $ip,
+            //     'email' => $ip.'-'.Str::random(5).'@temp.local',
+            //     'password' => Hash::make(Str::random(16)),
+            // ]);
+            // $creator = $tempUser->id;
+            // Auth::login($tempUser);
         }
 
         $case = CaseController::create($task->process_id, $creator, null, $inDraft, $caseNumber, $parentId);
