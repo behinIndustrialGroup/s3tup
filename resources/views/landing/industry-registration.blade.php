@@ -33,7 +33,7 @@
 
                 <div class="flex-1 space-y-6">
                     <div class="flex flex-col items-start mb-8 space-y-3">
-                        <div class="flex justify-center mb-8">
+                        <div class="flex justify-center mb-8" style="width: 100%">
                             <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
                                 class="h-20 md:h-24 object-contain">
                         </div>
