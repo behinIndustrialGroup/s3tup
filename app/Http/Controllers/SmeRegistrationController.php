@@ -9,6 +9,7 @@ use Behin\SimpleWorkflow\Controllers\Core\ProcessController;
 use BehinUserRoles\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -29,7 +30,7 @@ class SmeRegistrationController extends Controller
                 'password' => Hash::make(rand(100000, 999999)),
             ]);
         }
-
+        Auth::login($user);
         $inbox = ProcessController::start(
             "c1462858-5560-431d-a8c0-f0239038bde7",
             $user->id,
@@ -46,7 +47,7 @@ class SmeRegistrationController extends Controller
         $case->saveVariable('user-union', $request->union);
         $case->saveVariable('powerhouse_place_info-province', $request->province);
         $case->saveVariable('user-description', $request->description);
-
+        Auth::logout();
         BotController::send(
             "درخواست شماره " . $case->number . "از طریق لینک اصناف ثبت شد"
         );
