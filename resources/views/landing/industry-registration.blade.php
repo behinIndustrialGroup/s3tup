@@ -28,18 +28,18 @@
 <body class="bg-gray-50 text-gray-800">
     <header class="bg-gradient-to-l from-sky-400 via-blue-300 to-emerald-300 text-gray-900">
         <div class="container px-6 py-12">
-            <div class="flex flex-col md:flex-row gap-10 items-center">
+            <div class="flex flex-col md:flex-row gap-10">
 
 
                 <div class="flex-1 space-y-6">
                     <div class="flex flex-col items-start mb-8 space-y-3">
                         <div class="flex justify-center mb-8" style="width: 100%">
                             <img src="{{ url('behin/logo.png') . '?' . config('app.version') }}" alt="لوگو ستاپ"
-                                class="h-20 md:h-24 object-contain">
+                                class="h-25 md:h-28 object-contain">
                         </div>
 
                         <h2 class="mt-4 text-3xl md:text-4xl font-bold leading-tight">
-                            ستاپ، پلتفرم مورد تأیید وزارت صنعت، معدن و تجارت
+                            ستاپ، پلتفرم مورد تأیید وزارت نیرو
                         </h2>
                     </div>
                     <div>
