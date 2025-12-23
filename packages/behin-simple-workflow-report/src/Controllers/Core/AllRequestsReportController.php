@@ -50,9 +50,11 @@ class AllRequestsReportController extends Controller
     {
         return DB::table('wf_cases as c')
             ->leftJoin('wf_variables as v', 'c.id', '=', 'v.case_id')
+            ->leftJoin('users as u', 'c.creator', '=', 'u.id')
             ->select(
                 'c.id',
                 'c.number',
+                DB::raw("MAX(u.email) as user_mobile"),
                 DB::raw("MAX(CASE WHEN v.key IN ('user-firstname', 'user_firstname') THEN v.value END) as user_firstname"),
                 DB::raw("MAX(CASE WHEN v.key = 'user-lastname' THEN v.value END) as user_lastname"),
                 DB::raw("MAX(CASE WHEN `key` IN ('electricity_bill_id') THEN value END) as electricity_bill_id"),
@@ -83,6 +85,10 @@ class AllRequestsReportController extends Controller
 
         if (!empty($filters['case_number'])) {
             $query->having('number', 'like', '%' . $filters['case_number'] . '%');
+        }
+
+        if (!empty($filters['user_mobile'])) {
+            $query->having('user_mobile', 'like', '%' . $filters['user_mobile'] . '%');
         }
 
         if (!empty($filters['user_firstname'])) {

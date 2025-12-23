@@ -43,6 +43,10 @@
                                             <input type="text" name="case_number" value="{{ $filters['case_number'] ?? '' }}" class="form-control" placeholder="مثال: 1234">
                                         </div>
                                         <div class="col-md-3">
+                                            <label class="form-label">شماره موبایل</label>
+                                            <input type="text" name="user_mobile" value="{{ $filters['user_mobile'] ?? '' }}" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
                                             <label class="form-label">نام</label>
                                             <input type="text" name="user_firstname" value="{{ $filters['user_firstname'] ?? '' }}" class="form-control">
                                         </div>
