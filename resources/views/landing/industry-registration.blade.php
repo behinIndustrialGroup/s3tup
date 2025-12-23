@@ -75,6 +75,7 @@
                                 وقفه تأمین می‌کنند.
                             </span>
                         </li>
+
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
                             <span>
@@ -84,6 +85,7 @@
                                 حذف خاموشی به معنی حذف توقف خط، دوباره‌کاری، و آسیب به تجهیزات حساس است
                             </span>
                         </li>
+
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
                             <span>
@@ -93,6 +95,7 @@
                                 تولید خورشیدی و ذخیره‌سازی انرژی، مصرف پیک را کنترل و هزینه برق را کاهش می‌دهد
                             </span>
                         </li>
+
                         <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow">
                             <span class="mt-1 text-sky-700">•</span>
                             <span>
@@ -102,7 +105,20 @@
                                 کاهش ردپای کربنی و بهبود جایگاه برند صنعتی در زنجیره تأمین و صادرات
                             </span>
                         </li>
+
+                        <!-- باکس دو ستونه -->
+                        <li class="flex items-start gap-2 bg-white/70 rounded-lg p-3 shadow sm:col-span-2">
+                            <span class="mt-1 text-sky-700">•</span>
+                            <span>
+                                <span class="font-bold">
+                                    خاموشی چگونه حذف میشود
+                                </span><br>
+                                تغذیه بارهای حیاتی تولید به طور خودکار توسط اینورتر هیبرید در کسری از ثانیه ضمن حفظ
+                                فرکانس و ولتاژ
+                            </span>
+                        </li>
                     </ul>
+
                 </div>
                 <div class="flex-1 w-full">
                     <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
@@ -216,9 +232,9 @@
     </header>
 
     <main class="container px-6 py-12 space-y-16">
-        @if (!empty($provinceCounts))
+        {{-- @if (!empty($provinceCounts))
             @include('landing.partials.industry-province-chart', ['provinceCounts' => $provinceCounts])
-        @endif
+        @endif --}}
 
         <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white rounded-xl shadow p-6">
