@@ -20,20 +20,19 @@ class IndustryRegistrationController extends Controller
     public function store(StoreIndustryRegistrationRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data['ceo_mobile'] = convertPersianToEnglish($data['ceo_mobile']);
-        if (!empty($data['representative_mobile'])) {
-            $data['representative_mobile'] = convertPersianToEnglish($data['representative_mobile']);
+        $data['mobile'] = convertPersianToEnglish($data['mobile']);
+        if (!empty($data['demand_kw'])) {
+            $data['demand_kw'] = convertPersianToEnglish($data['demand_kw']);
         }
 
         $registration = IndustryRegistration::create($data);
 
         BotController::send(
             sprintf(
-                'درخواست جدید صنایع: %s - مدیرعامل: %s %s (%s)',
+                'درخواست جدید صنایع: %s - شخص تماس: %s (%s)',
                 $registration->company_name,
-                $registration->ceo_firstname,
-                $registration->ceo_lastname,
-                $registration->ceo_mobile,
+                $registration->contact_name,
+                $registration->mobile,
             )
         );
 
