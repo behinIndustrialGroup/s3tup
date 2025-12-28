@@ -14,6 +14,7 @@ use Behin\SimpleWorkflowReport\Controllers\Core\ChequeReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\ExpiredController;
 use Behin\SimpleWorkflowReport\Controllers\Core\ExternalAndInternalReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\AllRequestsReportController;
+use Behin\SimpleWorkflowReport\Controllers\Core\IndustryRegistrationReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\MyRequestController;
 use Behin\SimpleWorkflowReport\Controllers\Core\StageReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\RoleReportFormController;
@@ -47,5 +48,9 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
     Route::get('installer-applications/{installerApplication}/send-for-complete-profile', [InstallerApplicationReportController::class, 'sendForCompeleteProfile'])
     ->middleware(Access::class. ':گزارش لیست ثبت نام نصابان - لندینگ پیج')
     ->name('installer-applications.send-for-complete-profile');
+
+    Route::get('industry-registrations', [IndustryRegistrationReportController::class, 'index'])
+        ->middleware(Access::class. ':گزارش ثبت نام صنایع')
+        ->name('industry-registrations.index');
 
 });
