@@ -44,13 +44,12 @@ class FieldController extends Controller
         //     'datalist_from_database' => $request->datalist_from_database
         // ];
 
-        Fields::create([
+        $field = Fields::create([
             'name' => $request->name,
             'type' => $request->type,
             'attributes' => null //json_encode($attributes)
         ]);
-
-        return redirect()->route('simpleWorkflow.fields.index', ['#createForm'])->with('success', 'Fields created successfully.');
+        return redirect()->route('simpleWorkflow.fields.edit', $field->id)->with('success', 'Fields created successfully.');
     }
 
     public function edit(Fields $field)
@@ -69,7 +68,11 @@ class FieldController extends Controller
             'style' => $request->style,
             'script' => $request->script,
             'datalist_from_database' => $request->datalist_from_database,
-            'view_model_id' => $request->view_model_id
+            'view_model_id' => $request->view_model_id,
+            'endpoint' => $request->endpoint,
+            'minChars' => $request->minChars,
+            'limit' => $request->limit,
+            'initial_label' => $request->initial_label,
         ];
         if ($request->columns !== null) {
             $attributes['columns'] = $request->columns;
