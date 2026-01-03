@@ -9,7 +9,7 @@
     if (isset($_GET['Authority'])) {
         $authority = $_GET['Authority'];
         $s3tupPayments = Zarinpal_payment_records::where('pay_token', $authority)->first();
-        if ($s3tupPayments) {
+        if ($s3tupPayments and $s3tupPayments->status == 'pending') {
             $zarinpalVerify = zarinPal::verify($authority, $s3tupPayments->amount);
             if ($zarinpalVerify['status'] == 200) {
                 $s3tupPayments->status = 'success';
@@ -78,7 +78,7 @@
         var scriptId = 'fe098e3d-2af8-46ad-93ef-15ef9a406c05';
         var fd = new FormData();
         fd.append('item_id', id);
-        fd.append('callback_url', window.location.href);
+        fd.append('callback_url', window.location.origin);
         runScript(scriptId, fd, function(response) {
             if (response.status == 200) {
                 var url = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
@@ -95,7 +95,7 @@
         var scriptId = '0ab49d5d-5961-44f6-8cff-0d6535d862f8';
         var fd = new FormData();
         fd.append('item_id', id);
-        fd.append('callback_url', window.location.href);
+        fd.append('callback_url', window.location.origin);
         runScript(scriptId, fd, function(response) {
             console.log(response)
             if (response.status == 200) {
