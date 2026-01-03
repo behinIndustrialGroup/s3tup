@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Controllers;
 
 use App\Models\AzkivamPayment;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use RuntimeException;
 
-class AzkivamPaymentService
+class Azkivam
 {
     public function __construct(
         protected ?string $apiKey = null,
@@ -22,6 +22,63 @@ class AzkivamPaymentService
         $this->verifyEndpoint = $verifyEndpoint ?? config('azkivam.endpoints.verify');
         $this->defaultCallbackUrl = $defaultCallbackUrl ?? config('azkivam.callback_url');
     }
+
+
+
+
+    public static function authenticateToAzkivam()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post('https://api.azkiloan.com/auth/authenticate', [
+            'username' => 's3tup-test',
+            'password' => '9c4nX#UL',
+        ]);
+
+        if ($response->successful()) {
+            return [
+                'error' => false,
+                'status' => $response->status(),
+                'accessToken' => $response['result']['accessToken'],
+                'refreshToken' => $response['result']['refreshToken'],
+            ];
+        }
+
+        // در صورت خطا
+        return [
+            'error' => true,
+            'status' => $response->status(),
+            'body' => $response->body(),
+        ];
+        
+    }
+
+
+    public static function createAzkivamTicketWithToken(string $accessToken, array $payload)
+    {
+        try {
+            $response = Http::timeout(15)
+                ->withHeaders([
+                    'Authorization' => 'Bearer ' . $accessToken,
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                ])
+                ->post('https://api.azkiloan.com/payment/purchase', $payload);
+
+            $response->throw();
+
+            return $response->json();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return [
+                'error'   => true,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+
 
     /**
      * ایجاد پرداخت جدید و ذخیره شناسه یکتا در پایگاه داده
@@ -174,6 +231,6 @@ class AzkivamPaymentService
 
     protected function mergePayload(?array $original, array $new): array
     {
-        return array_filter(array_merge($original ?? [], $new), fn ($value) => $value !== null);
+        return array_filter(array_merge($original ?? [], $new), fn($value) => $value !== null);
     }
 }
