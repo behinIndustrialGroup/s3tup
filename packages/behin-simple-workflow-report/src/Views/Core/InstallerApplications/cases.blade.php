@@ -17,7 +17,7 @@
                 @foreach ($cases as $case)
                     <tr>
                         <td>
-                            <a href="{{ route('simpleWorkflow.inbox.caseHistoryView', ['caseNumber' => $row->number]) }}"
+                            <a href="{{ route('simpleWorkflow.inbox.caseHistoryView', ['caseNumber' => $case->number]) }}"
                                 target="_blank">
                                 <i class="material-icons">history</i>
                             </a>
