@@ -17,6 +17,12 @@ class InstallerRegistrationController extends Controller
 
     public function store(StoreInstallerApplicationRequest $request): RedirectResponse
     {
+        $row = InstallerApplication::where('phone', $request->phone)->first();
+        if($row){
+            return redirect()
+                ->route('installers.apply')
+                ->with('status', 'با این شماره موبایل قبلا ثبت نام انجام شده است');
+        }
         InstallerApplication::create($request->validated());
         BotController::send(
             $request->first_name . ' ' . $request->last_name . ' با شماره موبایل ' . $request->phone . ' ثبت نام کرد.', 
