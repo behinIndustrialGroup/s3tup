@@ -40,7 +40,7 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
     Route::get('all-requests/{case_number}', [AllRequestsReportController::class, 'show'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.show');
     Route::get('all-requests', [AllRequestsReportController::class, 'index'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.index');
 
-    Route::prefix('installer-cases')->name('installer-cases')->middleware('access:گزارش پرونده های فرایند نصابان')->group(function(){
+    Route::prefix('installer-cases')->name('installer-cases.')->middleware('access:گزارش پرونده های فرایند نصابان')->group(function(){
         Route::get('', [InstallerCasesReportController::class, 'index'])->name('index');
     });
 
