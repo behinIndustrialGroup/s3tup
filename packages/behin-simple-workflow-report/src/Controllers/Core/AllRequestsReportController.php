@@ -175,7 +175,7 @@ class AllRequestsReportController extends Controller
             $row->previous_status = Inbox::where('case_id', $row->id)
                 ->whereIn('status', ['done', 'doneByOther', 'canceled'])
                 ->orderBy('created_at', 'desc')
-                ->first();
+                ->first()?->task?->name;
             return $row;
         });
         // حالا خروجی اکسل ساده
