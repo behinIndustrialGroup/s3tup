@@ -72,12 +72,12 @@
         fd.append('item_id', id);
         fd.append('callback_url', window.location.href);
         runScript(scriptId, fd, function(response) {
-            console.log(response);
-            if (response.pay_token) {
+            if (response.status == 200) {
                 var url = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
                 console.log(url);
-                // window.location.href = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
+                window.location.href = url;
             } else {
+                console.log(response);
                 show_error("خطایی رخ داده است");
             }
         });
