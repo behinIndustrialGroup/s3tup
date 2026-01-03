@@ -151,7 +151,7 @@
         'script' => isset($fieldAttributes?->script) ? $fieldAttributes?->script : null,
     ]) !!}
 @endif
-@if ($fieldType === 'searchable-input')
+@if ($fieldDetails->type == 'searchable-input')
     {!! Form::searchableInput($fieldId, [
         'value' => $fieldValue,
         'endpoint' => isset($fieldAttributes->endpoint) && is_string($fieldAttributes->endpoint)
