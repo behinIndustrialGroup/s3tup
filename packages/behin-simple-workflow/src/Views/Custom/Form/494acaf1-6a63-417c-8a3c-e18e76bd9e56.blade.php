@@ -99,9 +99,7 @@
         runScript(scriptId, fd, function(response) {
             console.log(response)
             if (response.status == 200) {
-                var url = '{{ config('azkivam.pay_url') }}' + response.pay_token;
-                console.log(url);
-                window.location.href = url;
+                window.location.href = response.payment_url;
             } else {
                 console.log(response);
                 show_error("خطایی رخ داده است");
