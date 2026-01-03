@@ -23,18 +23,26 @@ class zarinPal
     
             $response->throw();
             if($response['data']['code'] == '100'){
-                return $response['data']['authority'];
+                return [
+                    'authority' => $response['data']['authority'],
+                    'status' => 200,
+                ];
             }else{
-                return $response;
+                return [
+                    'authority' => null,
+                    'status' => 400,
+                    'zarinpal_error_code' => $response['data']['code'],
+                ];
             }
     
         } catch (\Throwable $e) {
             report($e);
     
-            // return [
-            //     'error'   => true,
-            //     'message' => $e->getMessage(),
-            // ];
+            return [
+                'authority' => null,
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ];
         }
         $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
         $result = $client->PaymentRequest([
@@ -50,25 +58,6 @@ class zarinPal
         return $result;
     }
 
-    public static function pay($request)
-    {
-        $MerchantID = config('zarinpal.merchantId');
-        $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
-        $result = $client->PaymentRequest([
-            'MerchantID'     => $MerchantID,
-            'Amount'         => $request['amount'],
-            'Description'    => $request['description'],
-            'Mobile'         => $request['mobile'],
-            'CallbackURL'    => $request['callbackUrl'],
-        ]);
-
-        if ($result->Status == 100) {
-            return redirect(config('zarinpal.pay_url').$result->Authority);
-        } else {
-            return null;
-        }
-
-    }
 
     public static function verify($authority, $amount)
     {
@@ -83,17 +72,24 @@ class zarinPal
     
             $response->throw();
             if($response['data']['code'] == '100'){
-                return $response['data']['message'];
+                return [
+                    'result' => $response['data']['message'],
+                    'status' => 200,
+                ];
             }else{
-                return $response;
+                return [
+                    'result' => $response['data']['message'],
+                    'status' => 400,
+                    'zarinpal_error_code' => $response['data']['code'],
+                ];
             }
     
         } catch (\Throwable $e) {
             report($e);
     
             return [
-                'error'   => true,
-                'message' => $e->getMessage(),
+                'result' => $e->getMessage(),
+                'status' => 500,
             ];
         }
     }

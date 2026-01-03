@@ -15,8 +15,8 @@
                 echo '<pre>';
                 print_r($zarinpalVerify);
                 echo '</pre>';
-                // $s3tupPayments->status = $zarinpalVerify;
-                // $s3tupPayments->save();
+                $s3tupPayments->status = $zarinpalVerify['status'];
+                $s3tupPayments->save();
             }
         }
     $sale = Sales::where('case_number', $case->number)->first();
