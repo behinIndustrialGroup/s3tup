@@ -3,6 +3,8 @@
 return [
     'api_key' => env('AZKIVAM_API_KEY'),
     'base_url' => env('AZKIVAM_BASE_URL', 'https://api.azkivam.com'),
+    'username' => env('AZKIVAM_USERNAME'),
+    'password' => env('AZKIVAM_PASSWORD'),
     'provider_id' => env('AZKIVAM_PROVIDER_ID'),
     'merchant_id' => env('AZKIVAM_MERCHANT_ID'),
     'callback_url' => env('AZKIVAM_CALLBACK_URL'),

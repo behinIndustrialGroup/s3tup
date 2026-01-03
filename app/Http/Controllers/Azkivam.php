@@ -31,8 +31,8 @@ class Azkivam
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->post('https://api.azkiloan.com/auth/authenticate', [
-            'username' => 's3tup-test',
-            'password' => '9c4nX#UL',
+            'username' => config('azkivam.username'),
+            'password' => config('azkivam.password'),
         ]);
 
         if ($response->successful()) {
