@@ -48,7 +48,9 @@
         runScript(scriptId, fd, function (response) {
             console.log(response);
             if(response.pay_token){
-                window.location.href = '{{ config("zarinpal.pay_url") }}' + response.pay_token;
+                var url = '{{ config("zarinpal.pay_url") }}' + response.pay_token;
+                console.log(url);
+                // window.location.href = '{{ config("zarinpal.pay_url") }}' + response.pay_token;
             }else{
                 show_error("خطایی رخ داده است");
             }
