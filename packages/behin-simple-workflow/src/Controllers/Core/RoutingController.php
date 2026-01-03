@@ -134,7 +134,8 @@ class RoutingController extends Controller
                     DB::rollBack();
                     return $result;
                 }
-            } else {
+            } 
+            elseif(count($taskChildren)) {
                 $executedTaskIds = [];
                 foreach ($taskChildren as $childTask) {
                     // Log::info("Parent Task:" . $task->name . " Child Task:" . $childTask->name);
@@ -147,6 +148,12 @@ class RoutingController extends Controller
                         return $result;
                     }
                 }
+            }
+            else{
+                return response()->json([
+                    'status' => 400,
+                    'msg' => 'تسک بعدی تعریف نشده است و امکان ارسال به مرحله بعد وجود ندارد'
+                ]);
             }
             if ($task->type == 'form') {
                 if ($task->assignment_type == 'normal') {
@@ -383,7 +390,7 @@ class RoutingController extends Controller
                     $inbox = InboxController::create($task->id, $caseId, Auth::id(), 'new');
                 }
             }
-            if ($task->type == 'script') {
+            elseif ($task->type == 'script') {
                 $script = ScriptController::getById($task->executive_element_id);
                 $result = ScriptController::runScript($task->executive_element_id, $caseId);
                 if ($result) {
@@ -413,7 +420,7 @@ class RoutingController extends Controller
                     }
                 }
             }
-            if ($task->type == 'condition') {
+            elseif ($task->type == 'condition') {
                 $condition = ConditionController::getById($task->executive_element_id);
                 $result = ConditionController::runCondition($task->executive_element_id, $caseId);
                 // print($result);
@@ -443,11 +450,11 @@ class RoutingController extends Controller
                     }
                 }
             }
-            if ($task->type == 'end') {
+            elseif ($task->type == 'end') {
                 $inbox = InboxController::create($task->id, $caseId, null, 'done');
                 return 'break';
             }
-            if ($task->type == 'timed_condition') {
+            elseif ($task->type == 'timed_condition') {
                 // 1. بررسی اینکه زمان‌بندی استاتیک است یا داینامیک
                 $delayMinutes = 0;
                 if ($task->timing_type == 'static') {
@@ -478,6 +485,12 @@ class RoutingController extends Controller
                 }
 
                 return 'break';
+            }
+            else{
+                return response()->json([
+                    'status' => 400,
+                    'msg' => 'مرحله بعدی تعریف نشده است'
+                ]);
             }
         } catch (Exception $th) {
             // BotController::sendMessage(681208098, $th->getMessage());
