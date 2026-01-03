@@ -12,6 +12,7 @@
                     <th>شماره پرونده</th>
                     <th>تاریخ ایجاد</th>
                     <th>آخرین وضعیت</th>
+                    <th>وضعیت قبلی</th>
                 </tr>
                 @foreach ($cases as $case)
                     <tr>
@@ -22,6 +23,7 @@
                                 {{ $inbox->task->name ?? '' }}
                             @endforeach
                         </td>
+                        <td>{{ $case->previous_status }}</td>
                     </tr>
                 @endforeach
             </table>
