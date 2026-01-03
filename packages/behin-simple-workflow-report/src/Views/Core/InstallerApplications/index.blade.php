@@ -44,14 +44,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3">
-                            <div class="text-muted small">
-                                نمایش {{ $applications->firstItem() ?? 0 }} تا {{ $applications->lastItem() ?? 0 }} از {{ number_format($applications->total()) }} رکورد
-                            </div>
-                            <div>
-                                {{ $applications->onEachSide(1)->links('pagination::bootstrap-4') }}
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
