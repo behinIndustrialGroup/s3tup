@@ -162,11 +162,11 @@
         'initial_label' => $fieldAttributes->initial_label ?? ($fieldAttributes->initialLabel ?? null),
         'class' => 'form-control',
         'id' => $fieldId,
-        'placeholder' => $fieldPlaceholder,
+        'placeholder' => $fieldAttributes?->placeholder,
         'required' => $required,
         'readonly' => $readOnly,
-        'style' => $fieldStyle,
-        'script' => $fieldScript,
+        'style' => isset($fieldAttributes?->style) ? $fieldAttributes?->style : null,
+        'script' => isset($fieldAttributes?->script) ? $fieldAttributes?->script : null,
     ]) !!}
 @endif
 @if ($fieldDetails->type == 'select-multiple')
