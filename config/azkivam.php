@@ -2,15 +2,11 @@
 
 return [
     'api_key' => env('AZKIVAM_API_KEY'),
-    'base_url' => env('AZKIVAM_BASE_URL', 'https://api.azkivam.com'),
     'username' => env('AZKIVAM_USERNAME'),
     'password' => env('AZKIVAM_PASSWORD'),
     'provider_id' => env('AZKIVAM_PROVIDER_ID'),
     'merchant_id' => env('AZKIVAM_MERCHANT_ID'),
-    'callback_url' => env('AZKIVAM_CALLBACK_URL'),
-
-    'endpoints' => [
-        'request' => env('AZKIVAM_REQUEST_ENDPOINT', '/v1/payment/request'),
-        'verify' => env('AZKIVAM_VERIFY_ENDPOINT', '/v1/payment/verify'),
-    ],
+    'base_url' => 'https://api.azkiloan.com/auth/authenticate',
+    'request_url' => 'https://api.azkiloan.com/payment/purchase',
+    'verify_url' => 'https://api.azkiloan.com/payment/verify',
 ];
