@@ -60,7 +60,15 @@
                 <td>{{ $item->description }}</td>
                 <td>{{ number_format($item->amount) }} ریال</td>
                 <td>درگاه ازکی وام</td>
-                <td>{{ $item->status }}</td>
+                <td>
+                    @if($item->status == 'success')
+                        پرداخت شده
+                    @else
+                        <button class="btn btn-success" onclick="azkiPayment('{{ $item->id }}')">
+                            پرداخت
+                        </button>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </table>
@@ -76,6 +84,24 @@
                 var url = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
                 console.log(url);
                 window.location.href = url;
+            } else {
+                console.log(response);
+                show_error("خطایی رخ داده است");
+            }
+        });
+    }
+
+    function azkiPayment(id) { 
+        var scriptId = '0ab49d5d-5961-44f6-8cff-0d6535d862f8';
+        var fd = new FormData();
+        fd.append('item_id', id);
+        fd.append('callback_url', window.location.href);
+        runScript(scriptId, fd, function(response) {
+            console.log(response)
+            if (response.status == 200) {
+                var url = '{{ config('azkivam.pay_url') }}' + response.pay_token;
+                console.log(url);
+                // window.location.href = url;
             } else {
                 console.log(response);
                 show_error("خطایی رخ داده است");
