@@ -3,16 +3,7 @@
 namespace Behin\SimpleWorkflowReport\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use App\Models\InstallerApplication;
-use App\Models\User;
-use Behin\SimpleWorkflow\Controllers\Core\ProcessController;
 use Behin\SimpleWorkflow\Models\Core\Cases;
-use Behin\SimpleWorkflowReport\Models\InstallerApplicationProfile;
-use Behin\SimpleWorkflowReport\Models\InstallerApplicationProject;
-use Behin\Sms\Controllers\SmsController;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class InstallerCasesReportController extends Controller
