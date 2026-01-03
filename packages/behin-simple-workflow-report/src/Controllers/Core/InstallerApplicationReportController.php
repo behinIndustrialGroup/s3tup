@@ -20,7 +20,7 @@ class InstallerApplicationReportController extends Controller
     {
         $applications = InstallerApplication::with(['profile', 'projects'])
             ->orderByDesc('created_at')
-            ->paginate(15);
+            ->get();
 
         return view('SimpleWorkflowReportView::Core.InstallerApplications.index', compact('applications'));
     }
