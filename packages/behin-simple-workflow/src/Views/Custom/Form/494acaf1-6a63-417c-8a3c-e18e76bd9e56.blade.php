@@ -1,8 +1,21 @@
 @php
+    
+        
     use Behin\SimpleWorkflow\Models\Entities\Sales;
     use Behin\SimpleWorkflow\Models\Entities\Sale_items;
     use Behin\SimpleWorkflow\Models\Entities\Zarinpal_payment_records;
     use Behin\SimpleWorkflow\Models\Entities\Azkivam_payment_records;
+    use App\Http\Controllers\zarinPal;
+    
+    if(isset($_GET['Authority'])){
+        $authority = $_GET['Authority'];
+        $s3tupPayments = Zarinpal_payment_records::where('pay_token', $authority)->first();
+        if($s3tupPayments){
+                $zarinpalVerify = zarinPal::verify($authority, $s3tupPayments->amount);
+                $s3tupPayments->status = $zarinpalVerify;
+                $s3tupPayments->save();
+            }
+        }
     $sale = Sales::where('case_number', $case->number)->first();
     $saleItems = Sale_items::where('case_number', $case->number)->get();
     $s3tupPayments = Zarinpal_payment_records::where('case_number', $case->number)->get();
