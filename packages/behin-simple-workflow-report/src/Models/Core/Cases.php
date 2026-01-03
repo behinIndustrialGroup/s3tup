@@ -33,6 +33,13 @@ class Cases extends Model
         'creator'
     ];
 
+    public function whereIs(){
+        $childCaseId = Cases::where('number', $this->number)->pluck('id')->toArray();
+        $rows = Inbox::WhereIn('case_id', $childCaseId)->whereNotIn('status', ['done', 'doneByOther', 'canceled'])->get();
+
+        return $rows;
+    }
+
     public function variables()
     {
         return VariableController::getVariablesByCaseId($this->id);
