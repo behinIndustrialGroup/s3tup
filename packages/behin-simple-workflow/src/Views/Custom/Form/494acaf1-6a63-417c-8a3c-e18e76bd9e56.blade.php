@@ -45,9 +45,13 @@
                 <td>{{ number_format($item->amount) }} ریال</td>
                 <td>درگاه ستاپ</td>
                 <td>
-                    <button class="btn btn-success" onclick="s3yupPayment('{{ $item->id }}')">
-                        پرداخت
-                    </button>
+                    @if ($item->status == 'success')
+                        پرداخت شده
+                    @else
+                        <button class="btn btn-success" onclick="s3yupPayment('{{ $item->id }}')">
+                            پرداخت
+                        </button>
+                    @endif
                 </td>
             </tr>
         @endforeach
