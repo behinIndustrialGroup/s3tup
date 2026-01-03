@@ -23,6 +23,6 @@ class InstallerCasesReportController extends Controller
             ->orderByDesc('created_at')
             ->paginate(15);
 
-        return view('SimpleWorkflowReportView::Core.InstallerApplications.index', compact('cases'));
+        return view('SimpleWorkflowReportView::Core.InstallerApplications.cases', compact('cases'));
     }
 }
