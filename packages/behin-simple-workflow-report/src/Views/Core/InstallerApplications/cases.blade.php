@@ -16,7 +16,13 @@
                 </tr>
                 @foreach ($cases as $case)
                     <tr>
-                        <td>{{ $case->number }}</td>
+                        <td>
+                            <a href="{{ route('simpleWorkflow.inbox.caseHistoryView', ['caseNumber' => $row->number]) }}"
+                                target="_blank">
+                                <i class="material-icons">history</i>
+                            </a>
+                            {{ $case->number }}
+                        </td>
                         <td>{{ $case->created_at->format('Y-m-d') }}</td>
                         <td>
                             @foreach ($case->whereIs() as $inbox)
