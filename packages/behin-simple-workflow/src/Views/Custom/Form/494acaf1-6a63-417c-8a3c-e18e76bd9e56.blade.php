@@ -20,18 +20,32 @@
         @foreach ($s3tupPayments as $item)
             <tr>
                 <td>{{ $item->description }}</td>
-                <td>{{ $item->amount }}</td>
+                <td>{{ number_format($item->amount) }} ریال</td>
                 <td>درگاه ستاپ</td>
-                <td>{{ $item->status }}</td>
+                <td>
+                    <button class="btn btn-success" onclick="s3yupPayment({{ $item->id }})">
+                        پرداخت
+                    </button>
+                </td>
             </tr>
         @endforeach
         @foreach ($azkiPayments as $item)
             <tr>
                 <td>{{ $item->description }}</td>
-                <td>{{ $item->amount }}</td>
+                <td>{{ number_format($item->amount) }} ریال</td>
                 <td>درگاه ازکی وام</td>
                 <td>{{ $item->status }}</td>
             </tr>
         @endforeach
     </table>
 </div>
+<script>
+    function s3yupPayment(id) {
+        var scriptId = 'fe098e3d-2af8-46ad-93ef-15ef9a406c05';
+        var fd = new FormData();
+        fd.append('item_id', id);
+        runScript(scriptId, fd, function (response) {
+            console.log(response);
+        });
+    }
+</script>
