@@ -1,6 +1,3 @@
-@extends('behin-layouts.app')
-
-@section('title', $form->name)
 
 @php
 use Behin\SimpleWorkflow\Models\Entities\Sales;
@@ -11,7 +8,6 @@ use Behin\SimpleWorkflow\Models\Entities\Zarinpal_payment_records;
     $s3tupPayments = Zarinpal_payment_records::where('case_number', $case->number)->get();
 @endphp
 
-@section('content')
 
 <table>
     <tr>
@@ -29,4 +25,3 @@ use Behin\SimpleWorkflow\Models\Entities\Zarinpal_payment_records;
         </tr>    
     @endforeach
 </table>
-@endsection
