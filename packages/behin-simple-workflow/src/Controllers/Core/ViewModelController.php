@@ -140,21 +140,40 @@ class ViewModelController extends Controller
     public function resolveColumnPath($model, string $columnPath)
     {
         try {
-            $parts = str_contains('()->', $columnPath) ? explode('()->', $columnPath) : explode('->', $columnPath);
-            $current = $model;
+            if (str_contains('()->', $columnPath)) {
+                $parts = explode('()->', $columnPath);
+                $current = $model;
 
-            foreach ($parts as $index => $part) {
-                if (!$current) {
-                    return null;
+                foreach ($parts as $index => $part) {
+                    if (!$current) {
+                        return null;
+                    }
+
+                    if ($index === count($parts) - 1) {
+                        return $current->$part ?? null;
+                    }
+
+                    // استفاده از property به جای method
+                    $current = $current->$part();
                 }
+            } else {
+                $parts = explode('->', $columnPath);
+                $current = $model;
 
-                if ($index === count($parts) - 1) {
-                    return $current->$part ?? null;
+                foreach ($parts as $index => $part) {
+                    if (!$current) {
+                        return null;
+                    }
+
+                    if ($index === count($parts) - 1) {
+                        return $current->$part ?? null;
+                    }
+
+                    // استفاده از property به جای method
+                    $current = $current->$part;
                 }
-
-                // استفاده از property به جای method
-                $current = $current->$part();
             }
+
 
             return null;
         } catch (\Throwable $e) {
@@ -223,10 +242,9 @@ class ViewModelController extends Controller
         if ($viewModel->allow_read_row) {
             if ($viewModel->show_rows_based_on == 'case_id') {
                 $rows = $model::where('case_id', $case->id);
-            }
-            elseif ($viewModel->show_rows_based_on == 'case_number') {
+            } elseif ($viewModel->show_rows_based_on == 'case_number') {
                 $rows = $model::where('case_number', $case->number);
-            }else{
+            } else {
                 $rows = $model::query();
             }
 
@@ -255,7 +273,7 @@ class ViewModelController extends Controller
                     $row->alllow_update = self::userCanUpdateRow($row, $updateCondition);
                     $row->alllow_delete = self::userCanDeleteRow($row, $deleteCondition);
                 });
-            if($viewModel->script_before_show_rows){
+            if ($viewModel->script_before_show_rows) {
                 $request->merge(['rows' => $rows]);
                 $rows = ScriptController::runFromView($request, $viewModel->script_before_show_rows);
             }
@@ -268,11 +286,9 @@ class ViewModelController extends Controller
                         try {
                             if (str_contains($column, '()->')) {
                                 $value = $this->resolveColumnPath($row, $column);
-                            } 
-                            elseif (str_contains($column, '->')) {
+                            } elseif (str_contains($column, '->')) {
                                 $value = $this->resolveColumnPath($row, $column);
-                            }
-                            elseif (Str::endsWith($column, '()')) {
+                            } elseif (Str::endsWith($column, '()')) {
                                 $method = Str::beforeLast($column, '()');
 
                                 if ($method && method_exists($row, $method)) {
