@@ -173,4 +173,19 @@ class InstallerApplicationReportController extends Controller
         // $installerApplication->delete();
         return redirect()->back()->with('success', 'اطلاعات با موفقیت به‌روزرسانی شد.');
     }
+
+    public function sendReminderSms(InstallerApplication $installerApplication){
+        $mobile = convertPersianToEnglish($installerApplication->phone);
+
+        //ارسال پیامک به نصاب جهت تکمیل پروفایل
+        $response = SmsController::sendByTemp(
+            $mobile,
+            159963,
+            array([
+                'name' => 'NAME',
+                'value' => $installerApplication->first_name . ' ' . $installerApplication->last_name,
+            ])
+        );
+        return redirect()->back()->with('success', 'پیامک با موفقیت ارسال شد.');
+    }
 }

@@ -67,13 +67,13 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center mb-2">
+                            {{-- <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h5 class="mb-0">پروژه‌ها</h5>
                                 <button type="button" id="add-project" class="btn btn-outline-primary btn-sm">افزودن
                                     پروژه</button>
-                            </div>
+                            </div> --}}
 
-                            <div id="projects-wrapper">
+                            {{-- <div id="projects-wrapper">
                                 @foreach ($application->projects as $index => $project)
                                     <div class="card mb-3 project-card">
                                         <div class="card-body">
@@ -113,11 +113,11 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
+                            </div> --}}
 
-                            <div class="d-grid">
+                            {{-- <div class="d-grid">
                                 <button type="submit" class="btn btn-success">ذخیره تغییرات</button>
-                            </div>
+                            </div> --}}
                         </form>
 
                     </div>
@@ -128,6 +128,13 @@
                             href="{{ route('simpleWorkflowReport.installer-applications.send-for-complete-profile', $application) }}">ارسال
                             جهت تکمیل پروفایل</a>
                     </div>
+                @else
+                <div class="card">
+                    <a class="btn btn-warning"
+                        href="{{ route('simpleWorkflowReport.installer-applications.send-reminder-sms', $application) }}">
+                    پیامک یاداوری مجدد
+                    </a>
+                </div>
                 @endif
             </div>
         </div>

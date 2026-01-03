@@ -55,6 +55,10 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
     ->middleware(Access::class. ':گزارش لیست ثبت نام نصابان - لندینگ پیج')
     ->name('installer-applications.send-for-complete-profile');
 
+    Route::get('installer-applications/{installerApplication}/send-reminder-sms', [InstallerApplicationReportController::class, 'sendReminderSms'])
+    ->middleware(Access::class. ':گزارش لیست ثبت نام نصابان - لندینگ پیج')
+    ->name('installer-applications.send-reminder-sms');
+
     Route::get('industry-registrations', [IndustryRegistrationReportController::class, 'index'])
         ->middleware(Access::class. ':گزارش ثبت نام صنایع')
         ->name('industry-registrations.index');
