@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Behin\Ami\Services\CallHistoryService;
 use Behin\SimpleWorkflow\Models\Core\Cases;
 use Behin\SimpleWorkflow\Models\Core\Inbox;
+use Behin\SimpleWorkflow\Models\Core\Process;
+use Behin\SimpleWorkflow\Models\Core\Task;
 use Behin\SimpleWorkflowReport\Exports\AllRequestsReportExport;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\View;
@@ -43,11 +45,27 @@ class AllRequestsReportController extends Controller
             return $row;
         });
 
+        $tasks = Task::where('process_id', 'f0764265-c030-4a5b-8f54-9a5ffc6fa50f')
+            ->where('type', 'form')
+            ->get();
+        $inboxes = Inbox::whereIn('task_id', $tasks->pluck('id'))
+            ->whereNotIn('status', ['done', 'doneByOther', 'canceled'])
+            ->select(
+                DB::raw("COUNT(*) as count"),
+                'task_id'
+            )
+            ->groupBy('task_id')
+            ->get()->transform(function ($inbox) {
+                $inbox->task = Task::find($inbox->task_id);
+                return $inbox;
+            });
+
         // return $rows;
         return view('SimpleWorkflowReportView::Core.AllRequests.index', [
             'rows' => $rows,
             'filters' => $filters,
             'perPage' => $perPage,
+            'inboxes' => $inboxes,
         ]);
     }
 
