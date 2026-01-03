@@ -5,11 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use SoapClient;
+use Illuminate\Support\Facades\Http;
 
 class zarinPal
 {
     public static function getAuthority($amount, $description, $mobile, $callbackUrl){
-        $MerchantID = config('zarinpal.merchantId');
+        try {
+            $response = Http::timeout(15)
+                ->acceptJson()
+                ->post(config('zarinpal.authority_url'), [
+                    'merchant_id'  => config('zarinpal.merchantId'),
+                    'amount'       => $amount,
+                    'callback_url' => $callbackUrl,
+                    'description'  => $description,
+                    'mobile'     => $mobile,
+                ]);
+    
+            $response->throw();
+            if($response['data']['code'] == '100'){
+                return $response['data']['authority'];
+            }else{
+                return $response;
+            }
+    
+        } catch (\Throwable $e) {
+            report($e);
+    
+            // return [
+            //     'error'   => true,
+            //     'message' => $e->getMessage(),
+            // ];
+        }
         $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
         $result = $client->PaymentRequest([
             'MerchantID'     => $MerchantID,
@@ -21,6 +47,7 @@ class zarinPal
 
         if ($result->Status == 100)
             return $result->Authority;
+        return $result;
     }
 
     public static function pay($request)
@@ -43,28 +70,31 @@ class zarinPal
 
     }
 
-    public static function verify(Request $request, $price)
+    public static function verify($authority, $amount)
     {
-        $MerchantID = config('zarinpal.merchantId');
-        if ($request->Status == 'OK') {
-            // URL also can be ir.zarinpal.com or de.zarinpal.com
-            $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
-
-            $result = $client->PaymentVerification([
-                'MerchantID'     => $MerchantID,
-                'Authority'      => $request->Authority,
-                'Amount'         => $price,
-            ]);
-            // Log::info('zarinpal', array($result));
-
-            if ($result->Status == 100 or $result->Status == 101) {
-                return $result->RefID;
-
-            }else {
-                return 0;
+        try {
+            $response = Http::timeout(15)
+                ->acceptJson()
+                ->post(config('zarinpal.payment_verification_url'), [
+                    'merchant_id' => config('zarinpal.merchantId'),
+                    'amount'      => $amount,
+                    'authority'   => $authority,
+                ]);
+    
+            $response->throw();
+            if($response['data']['code'] == '100'){
+                return $response['data']['message'];
+            }else{
+                return $response;
             }
-        }else{
-            return 0;
+    
+        } catch (\Throwable $e) {
+            report($e);
+    
+            return [
+                'error'   => true,
+                'message' => $e->getMessage(),
+            ];
         }
     }
 }
