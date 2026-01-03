@@ -34,7 +34,12 @@ class AllRequestsReportController extends Controller
         $rows->getCollection()->transform(function ($row) {
             $row->last_status = Inbox::where('case_id', $row->id)
                 ->whereNotIn('status', ['done', 'doneByOther', 'canceled'])
+                ->orderBy('created_at', 'desc')
                 ->get();
+            $row->previous_status = Inbox::where('case_id', $row->id)
+                ->whereIn('status', ['done', 'doneByOther', 'canceled'])
+                ->orderBy('created_at', 'asc')
+                ->first();
             return $row;
         });
 
@@ -51,6 +56,8 @@ class AllRequestsReportController extends Controller
         return DB::table('wf_cases as c')
             ->leftJoin('wf_variables as v', 'c.id', '=', 'v.case_id')
             ->leftJoin('users as u', 'c.creator', '=', 'u.id')
+            ->where('c.process_id', 'f0764265-c030-4a5b-8f54-9a5ffc6fa50f')
+            ->whereNull('c.deleted_at')
             ->select(
                 'c.id',
                 'c.number',

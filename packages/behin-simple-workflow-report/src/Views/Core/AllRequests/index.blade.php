@@ -130,6 +130,7 @@
                                     <th>امکان‌سنجی</th>
                                     <th>نتیجه تماس رابط مالی با متقاضی</th>
                                     <th>آخرین وضعیت درخواست</th>
+                                    <th>وضعیت قبلی درخواست</th>
                                     <th class="text-center">جزئیات</th>
                                 </tr>
                                 </thead>
@@ -158,6 +159,9 @@
                                             @foreach ($row->last_status as $last_status)
                                                 {{ $last_status->task->name ?? '' }}
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            {{ $row->previous_status->task->name ?? '' }}
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ route('simpleWorkflowReport.all-requests.show', $row->number) }}" class="btn btn-sm btn-outline-primary px-3">
