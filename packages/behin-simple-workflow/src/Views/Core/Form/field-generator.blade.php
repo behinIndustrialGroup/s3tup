@@ -66,7 +66,7 @@
     ]) !!}
 @endif
 @if ($fieldDetails->type == 'number')
-    {!! Form::text($fieldId, [
+    {!! Form::number($fieldId, [
         'value' => $fieldValue,
         'class' => 'form-control',
         'id' => $fieldId,
