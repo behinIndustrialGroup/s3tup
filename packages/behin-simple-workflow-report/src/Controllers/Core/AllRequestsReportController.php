@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Schema;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Behin\SimpleWorkflow\Models\Core\ViewModel;
+use Carbon\Carbon;
 
 class AllRequestsReportController extends Controller
 {
@@ -60,12 +61,32 @@ class AllRequestsReportController extends Controller
                 return $inbox;
             });
 
+        $endDate = Carbon::now()
+            ->startOfWeek(Carbon::WEDNESDAY)
+            ->subWeek();
+
+        $startDate = (clone $endDate)->subWeek();
+        $inboxesWeekly = Inbox::whereIn('task_id', $tasks)
+            ->whereNotIn('status', ['done', 'doneByOther', 'canceled'])
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->select(
+                DB::raw("COUNT(*) as count"),
+                'task_id'
+            )
+            ->groupBy('task_id')
+            ->get()
+            ->transform(function ($inbox) {
+                $inbox->task = Task::find($inbox->task_id);
+                return $inbox;
+            });
+
         // return $rows;
         return view('SimpleWorkflowReportView::Core.AllRequests.index', [
             'rows' => $rows,
             'filters' => $filters,
             'perPage' => $perPage,
             'inboxes' => $inboxes,
+            'inboxesWeekly' => $inboxesWeekly,
         ]);
     }
 

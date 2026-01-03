@@ -12,6 +12,22 @@
                             <th>فعالیت</th>
                             <th>تعداد</th>
                         </tr>
+                        @foreach ($inboxesWeekly as $inbox)
+                            <tr>
+                                <td>{{ $inbox->task->name }}</td>
+                                <td>{{ $inbox->count }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>فعالیت</th>
+                            <th>تعداد</th>
+                        </tr>
                         @foreach ($inboxes as $inbox)
                             <tr>
                                 <td>{{ $inbox->task->name }}</td>
