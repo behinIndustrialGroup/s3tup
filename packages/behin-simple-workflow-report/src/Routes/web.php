@@ -53,4 +53,6 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
         ->middleware(Access::class. ':گزارش ثبت نام صنایع')
         ->name('industry-registrations.index');
 
+    require(__DIR__ . '/../AllRequests/web.php');
+
 });
