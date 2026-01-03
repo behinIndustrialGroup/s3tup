@@ -12,7 +12,7 @@
                     <div class="card-header">درخواست‌های ارسال شده</div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped" id="requests">
                                 <thead>
                                     <tr>
                                         <th>نام</th>
@@ -57,4 +57,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#requests').DataTable();
+    });
+</script>
 @endsection
