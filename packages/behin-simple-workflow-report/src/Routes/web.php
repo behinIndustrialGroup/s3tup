@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InstallerRegistrationController;
 use Behin\SimpleWorkflow\Controllers\Core\ConditionController;
 use Behin\SimpleWorkflow\Controllers\Core\FieldController;
 use Behin\SimpleWorkflow\Controllers\Core\FormController;
@@ -20,6 +21,7 @@ use Behin\SimpleWorkflowReport\Controllers\Core\StageReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\RoleReportFormController;
 use Behin\SimpleWorkflowReport\Controllers\Core\SummaryReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\InstallerApplicationReportController;
+use Behin\SimpleWorkflowReport\Controllers\Core\InstallerCasesReportController;
 use Behin\SimpleWorkflowReport\Controllers\Core\PersonelActivityController;
 use Behin\SimpleWorkflowReport\Controllers\Core\PhonebookController;
 use Behin\SimpleWorkflowReport\Controllers\Core\RecordingController;
@@ -37,6 +39,10 @@ Route::name('simpleWorkflowReport.')->prefix('workflow-report')->middleware(['we
     Route::get('all-requests/export', [AllRequestsReportController::class, 'export'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.export');
     Route::get('all-requests/{case_number}', [AllRequestsReportController::class, 'show'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.show');
     Route::get('all-requests', [AllRequestsReportController::class, 'index'])->middleware(Access::class. ':گزارش کل درخواست های ثبت شده')->name('all-requests.index');
+
+    Route::prefix('installer-cases')->name('installer-cases')->middleware('access:گزارش پرونده های فرایند نصابان')->group(function(){
+        Route::get('', [InstallerCasesReportController::class, 'index'])->name('index');
+    });
 
     Route::get('stage-report/export', [StageReportController::class, 'export'])->middleware(Access::class. ':گزارش مرحله ها')->name('stage-report.export');
     Route::get('stage-report', [StageReportController::class, 'index'])->middleware(Access::class. ':گزارش مرحله ها')->name('stage-report.index');
