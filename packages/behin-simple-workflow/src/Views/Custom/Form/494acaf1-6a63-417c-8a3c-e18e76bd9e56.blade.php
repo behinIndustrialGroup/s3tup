@@ -101,7 +101,7 @@
             if (response.status == 200) {
                 var url = '{{ config('azkivam.pay_url') }}' + response.pay_token;
                 console.log(url);
-                // window.location.href = url;
+                window.location.href = url;
             } else {
                 console.log(response);
                 show_error("خطایی رخ داده است");
