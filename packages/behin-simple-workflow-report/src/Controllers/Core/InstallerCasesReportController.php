@@ -21,7 +21,7 @@ class InstallerCasesReportController extends Controller
     {
         $cases = Cases::where('process_id', '3ed250f5-65fc-4f44-91af-00731d914a40')
             ->orderByDesc('created_at')
-            ->paginate(15);
+            ->get();
 
         return view('SimpleWorkflowReportView::Core.InstallerApplications.cases', compact('cases'));
     }
