@@ -78,7 +78,7 @@
         var scriptId = 'fe098e3d-2af8-46ad-93ef-15ef9a406c05';
         var fd = new FormData();
         fd.append('item_id', id);
-        fd.append('callback_url', window.location.origin);
+        fd.append('callback_url', window.location.origin + window.location.pathname);
         runScript(scriptId, fd, function(response) {
             if (response.status == 200) {
                 var url = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
@@ -95,7 +95,7 @@
         var scriptId = '0ab49d5d-5961-44f6-8cff-0d6535d862f8';
         var fd = new FormData();
         fd.append('item_id', id);
-        fd.append('callback_url', window.location.origin);
+        fd.append('callback_url', window.location.origin + window.location.pathname);
         runScript(scriptId, fd, function(response) {
             console.log(response)
             if (response.status == 200) {
