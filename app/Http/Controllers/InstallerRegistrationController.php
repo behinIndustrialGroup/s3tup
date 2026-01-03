@@ -17,6 +17,12 @@ class InstallerRegistrationController extends Controller
 
     public function store(StoreInstallerApplicationRequest $request): RedirectResponse
     {
+        $request->validated([
+            'phone' => 'required|numeric|digits:11|unique:installer_applications,phone',
+            'national_id' => 'required|numeric|digits:10|unique:installer_applications,national_id',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+        ]);
         $row = InstallerApplication::where('phone', $request->phone)->first();
         if($row){
             return redirect()
