@@ -26,7 +26,7 @@ class Azkivam
 
 
 
-    public static function authenticateToAzkivam()
+    public static function getAccessToken()
     {
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
