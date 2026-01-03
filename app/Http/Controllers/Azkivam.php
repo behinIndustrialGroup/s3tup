@@ -38,7 +38,7 @@ class Azkivam
         if ($response->successful()) {
             return [
                 'error' => false,
-                'status' => $response->status(),
+                'status' => 200,
                 'accessToken' => $response['result']['accessToken'],
                 'refreshToken' => $response['result']['refreshToken'],
             ];
@@ -47,7 +47,7 @@ class Azkivam
         // در صورت خطا
         return [
             'error' => true,
-            'status' => $response->status(),
+            'status' => 400,
             'body' => $response->body(),
         ];
         
@@ -66,6 +66,20 @@ class Azkivam
                 ->post('https://api.azkiloan.com/payment/purchase', $payload);
 
             $response->throw();
+            if($response['rsCode'] == 0){
+                return [
+                    'error' => false,
+                    'status' => 200,
+                    'ticket_id' => $response['result']['ticket_id'],
+                    'payment_url' => $response['result']['payment_uri'],
+                ];
+            }else{
+                return [
+                    'error' => true,
+                    'status' => 400,
+                    'body' => $response->body(),
+                ];
+            }
 
             return $response->json();
         } catch (\Throwable $e) {
@@ -73,6 +87,7 @@ class Azkivam
 
             return [
                 'error'   => true,
+                'status' => 500,
                 'message' => $e->getMessage(),
             ];
         }
