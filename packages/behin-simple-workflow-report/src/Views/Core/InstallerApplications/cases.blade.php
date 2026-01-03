@@ -18,7 +18,7 @@
                         <td>{{ $case->number }}</td>
                         <td>{{ $case->created_at->format('Y-m-d') }}</td>
                         <td>
-                            @foreach ($cases->whereIs() as $inbox)
+                            @foreach ($case->whereIs() as $inbox)
                                 {{ $inbox->task->name ?? '' }}
                             @endforeach
                         </td>
