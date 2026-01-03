@@ -1,24 +1,30 @@
 @php
-    
-        
+
     use Behin\SimpleWorkflow\Models\Entities\Sales;
     use Behin\SimpleWorkflow\Models\Entities\Sale_items;
     use Behin\SimpleWorkflow\Models\Entities\Zarinpal_payment_records;
     use Behin\SimpleWorkflow\Models\Entities\Azkivam_payment_records;
     use App\Http\Controllers\zarinPal;
 
-    if(isset($_GET['Authority'])){
+    if (isset($_GET['Authority'])) {
         $authority = $_GET['Authority'];
         $s3tupPayments = Zarinpal_payment_records::where('pay_token', $authority)->first();
-        if($s3tupPayments){
-                $zarinpalVerify = zarinPal::verify($authority, $s3tupPayments->amount);
-                echo '<pre>';
-                print_r($zarinpalVerify);
-                echo '</pre>';
-                $s3tupPayments->status = $zarinpalVerify['status'];
+        if ($s3tupPayments) {
+            $zarinpalVerify = zarinPal::verify($authority, $s3tupPayments->amount);
+            if ($zarinpalVerify['status'] == 200) {
+                $s3tupPayments->status = 'success';
                 $s3tupPayments->save();
+                echo "<div class='alert alert-success'>پرداخت با موفقیت انجام شد</div>";
+            } else {
+                $s3tupPayments->status = 'failed';
+                $s3tupPayments->save();
+                echo "<div class='alert alert-danger'>خطا در پرداخت</div>";
             }
+            // echo '<pre>';
+            // print_r($zarinpalVerify);
+            // echo '</pre>';
         }
+    }
     $sale = Sales::where('case_number', $case->number)->first();
     $saleItems = Sale_items::where('case_number', $case->number)->get();
     $s3tupPayments = Zarinpal_payment_records::where('case_number', $case->number)->get();
@@ -61,13 +67,13 @@
         var fd = new FormData();
         fd.append('item_id', id);
         fd.append('callback_url', window.location.href);
-        runScript(scriptId, fd, function (response) {
+        runScript(scriptId, fd, function(response) {
             console.log(response);
-            if(response.pay_token){
-                var url = '{{ config("zarinpal.pay_url") }}' + response.pay_token;
+            if (response.pay_token) {
+                var url = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
                 console.log(url);
-                // window.location.href = '{{ config("zarinpal.pay_url") }}' + response.pay_token;
-            }else{
+                // window.location.href = '{{ config('zarinpal.pay_url') }}' + response.pay_token;
+            } else {
                 show_error("خطایی رخ داده است");
             }
         });

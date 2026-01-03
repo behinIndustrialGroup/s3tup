@@ -22,7 +22,7 @@ class zarinPal
                 ]);
     
             $response->throw();
-            if($response['data']['code'] == '100'){
+            if($response['data']['code'] >= 100){
                 return [
                     'authority' => $response['data']['authority'],
                     'status' => 200,
@@ -32,6 +32,7 @@ class zarinPal
                     'authority' => null,
                     'status' => 400,
                     'zarinpal_error_code' => $response['data']['code'],
+                    'errors' => $response['data']['errors'],
                 ];
             }
     
@@ -41,7 +42,9 @@ class zarinPal
             return [
                 'authority' => null,
                 'status' => 500,
-                'message' => $e->getMessage(),
+                'errors' => [
+                    'server_error' => $e->getMessage(),
+                ],
             ];
         }
         $client = new SoapClient(config('zarinpal.payment_verification_url'), ['encoding' => 'UTF-8']);
@@ -71,7 +74,7 @@ class zarinPal
                 ]);
     
             $response->throw();
-            if($response['data']['code'] == '100'){
+            if($response['data']['code'] >= 100){
                 return [
                     'result' => $response['data']['message'],
                     'status' => 200,
@@ -81,6 +84,7 @@ class zarinPal
                     'result' => $response['data']['message'],
                     'status' => 400,
                     'zarinpal_error_code' => $response['data']['code'],
+                    'errors' => $response['data']['errors'],
                 ];
             }
     
@@ -88,7 +92,9 @@ class zarinPal
             report($e);
     
             return [
-                'result' => $e->getMessage(),
+                'errors' => [
+                    'server_error' => $e->getMessage(),
+                ],
                 'status' => 500,
             ];
         }
