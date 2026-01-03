@@ -44,8 +44,14 @@
         var scriptId = 'fe098e3d-2af8-46ad-93ef-15ef9a406c05';
         var fd = new FormData();
         fd.append('item_id', id);
+        fd.append('callback_url', window.location.href);
         runScript(scriptId, fd, function (response) {
             console.log(response);
+            if(response.pay_token){
+                window.location.href = '{{ config("zarinpal.pay_url") }}' + response.pay_token;
+            }else{
+                show_error("خطایی رخ داده است");
+            }
         });
     }
 </script>
