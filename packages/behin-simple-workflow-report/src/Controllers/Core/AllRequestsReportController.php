@@ -38,7 +38,7 @@ class AllRequestsReportController extends Controller
                 ->get();
             $row->previous_status = Inbox::where('case_id', $row->id)
                 ->whereIn('status', ['done', 'doneByOther', 'canceled'])
-                ->orderBy('created_at', 'asc')
+                ->orderBy('created_at', 'desc')
                 ->first();
             return $row;
         });
@@ -172,6 +172,10 @@ class AllRequestsReportController extends Controller
                 ->toArray();
 
             $row->last_status = implode(', ', $statuses);
+            $row->previous_status = Inbox::where('case_id', $row->id)
+                ->whereIn('status', ['done', 'doneByOther', 'canceled'])
+                ->orderBy('created_at', 'desc')
+                ->first();
             return $row;
         });
         // حالا خروجی اکسل ساده

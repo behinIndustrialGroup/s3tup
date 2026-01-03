@@ -34,6 +34,7 @@ class AllRequestsReportExport implements FromCollection, WithHeadings, WithMappi
             'امکان‌سنجی',
             'نتیجه تماس رابط مالی با متقاضی',
             'آخرین وضعیت درخواست',
+            'وضعیت قبلی درخواست',
         ];
     }
 
@@ -59,6 +60,7 @@ class AllRequestsReportExport implements FromCollection, WithHeadings, WithMappi
             $row['feasibility_study'] ?? null,
             $row['fin_interface_call_result'] ?? null,
             $row['last_status'] ?? null,
+            $row['previous_status'] ?? null,
         ];
     }
 }
