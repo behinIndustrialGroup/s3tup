@@ -23,7 +23,7 @@
                 <td>{{ number_format($item->amount) }} ریال</td>
                 <td>درگاه ستاپ</td>
                 <td>
-                    <button class="btn btn-success" onclick="s3yupPayment({{ $item->id }})">
+                    <button class="btn btn-success" onclick="s3yupPayment('{{ $item->id }}')">
                         پرداخت
                     </button>
                 </td>
