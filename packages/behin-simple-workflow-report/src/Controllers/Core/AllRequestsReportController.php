@@ -66,7 +66,7 @@ class AllRequestsReportController extends Controller
             ->subWeek();
 
         $startDate = (clone $endDate)->subWeek();
-        $inboxesWeekly = Inbox::whereIn('task_id', $tasks)
+        $inboxesWeekly = Inbox::whereIn('task_id', $tasks->pluck('id'))
             ->whereNotIn('status', ['done', 'doneByOther', 'canceled'])
             ->whereBetween('created_at', [$startDate, $endDate])
             ->select(
