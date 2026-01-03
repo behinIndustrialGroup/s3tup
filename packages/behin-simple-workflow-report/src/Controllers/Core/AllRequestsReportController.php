@@ -73,7 +73,7 @@ class AllRequestsReportController extends Controller
                 DB::raw("COUNT(*) as count"),
                 'task_id'
             )
-            ->groupBy('task_id', 'case_id')
+            ->groupBy('task_id')
             ->get()
             ->transform(function ($inbox) {
                 $inbox->task = Task::find($inbox->task_id);
