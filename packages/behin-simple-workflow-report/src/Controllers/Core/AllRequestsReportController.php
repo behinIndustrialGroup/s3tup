@@ -62,7 +62,7 @@ class AllRequestsReportController extends Controller
             });
 
         $endDate = Carbon::now()
-            ->startOfWeek(Carbon::WEDNESDAY);
+            ->startOfWeek(Carbon::WEDNESDAY)->endOfDay();
 
         $startDate = (clone $endDate)->subWeek();
         dd($startDate, $endDate);
