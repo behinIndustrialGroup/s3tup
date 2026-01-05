@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AzkivamPayment;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -66,6 +67,47 @@ class Azkivam
                 ->post('https://api.azkiloan.com/payment/purchase', $payload);
 
             $response->throw();
+            if($response['rsCode'] == 0){
+                return [
+                    'error' => false,
+                    'status' => 200,
+                    'ticket_id' => $response['result']['ticket_id'],
+                    'payment_url' => $response['result']['payment_uri'],
+                ];
+            }else{
+                return [
+                    'error' => true,
+                    'status' => 400,
+                    'body' => $response->body(),
+                ];
+            }
+
+            return $response->json();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return [
+                'error'   => true,
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public static function getAzkivamTicketStatusWithToken(string $accessToken, array $payload)
+    {
+        try {
+            $response = Http::timeout(15)
+                ->withHeaders([
+                    'Authorization' => 'Bearer ' . $accessToken,
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                ])
+                ->post('https://api.azkiloan.com/payment/status', $payload);
+
+            $response->throw();
+            return $response->body();
+            Log::info($response->body());
             if($response['rsCode'] == 0){
                 return [
                     'error' => false,
