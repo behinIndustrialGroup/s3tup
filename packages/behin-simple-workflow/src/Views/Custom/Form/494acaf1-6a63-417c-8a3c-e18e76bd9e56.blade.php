@@ -26,20 +26,19 @@
             // echo '</pre>';
         }
     }
-    if(isset($_GET['ticket_id'])){
+    if (isset($_GET['ticket_id'])) {
         $ticket_id = $_GET['ticket_id'];
         $azkiPayments = Azkivam_payment_records::where('ticket_id', $ticket_id)->first();
-        if($azkiPayments and $azkiPayments->status == 'created'){
-            $status = Azkivam::getAzkivamTicketStatusWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
-            if(isset($status['result']['status']) and $status['result']['status'] == 8){
-                $azkiPayments->status = 'done';
+        if ($azkiPayments and $azkiPayments->status == 'created') {
+            $verify = Azkivam::verifyAzkivamTicketWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
+            if ($verify['status'] == 200) {
+                $azkiPayments->status = 'verify';
                 $azkiPayments->save();
-                $verify = Azkivam::verifyAzkivamTicketWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
-                if(isset($verify['result']['status']) and $verify['result']['status'] == 2){
-                    $azkiPayments->status = 'verify';
-                    $azkiPayments->save();
-                }
                 echo "<div class='alert alert-success'>پرداخت با موفقیت انجام شد</div>";
+            } else {
+                $azkiPayments->status = 'failed';
+                $azkiPayments->save();
+                echo "<div class='alert alert-danger'>خطا در پرداخت</div>";
             }
         }
     }
@@ -79,7 +78,7 @@
                 <td>{{ number_format($item->amount) }} ریال</td>
                 <td>درگاه ازکی وام</td>
                 <td>
-                    @if($item->status == 'success')
+                    @if ($item->status == 'success')
                         پرداخت شده
                     @else
                         <button class="btn btn-success" onclick="azkiPayment('{{ $item->id }}')">
@@ -109,7 +108,7 @@
         });
     }
 
-    function azkiPayment(id) { 
+    function azkiPayment(id) {
         var scriptId = '0ab49d5d-5961-44f6-8cff-0d6535d862f8';
         var fd = new FormData();
         fd.append('item_id', id);

@@ -147,14 +147,11 @@ class Azkivam
                 ->post('https://api.azkiloan.com/payment/verify', $payload);
 
             $response->throw();
-            return $response->body();
-            Log::info($response->body());
-            if($response['rsCode'] == 0){
+            if($response['rsCode'] == 0 and $response['result']['status'] == 2){
                 return [
                     'error' => false,
                     'status' => 200,
-                    'ticket_id' => $response['result']['ticket_id'],
-                    'payment_url' => $response['result']['payment_uri'],
+                    'message' => 'verified',
                 ];
             }else{
                 return [
