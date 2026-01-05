@@ -26,8 +26,8 @@
             // echo '</pre>';
         }
     }
-    if (isset($_GET['ticket_id'])) {
-        $ticket_id = $_GET['ticket_id'];
+    if (isset($_GET['ticketId'])) {
+        $ticket_id = $_GET['ticketId'];
         $azkiPayments = Azkivam_payment_records::where('ticket_id', $ticket_id)->first();
         if ($azkiPayments and $azkiPayments->status == 'created') {
             $verify = Azkivam::verifyAzkivamTicketWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
