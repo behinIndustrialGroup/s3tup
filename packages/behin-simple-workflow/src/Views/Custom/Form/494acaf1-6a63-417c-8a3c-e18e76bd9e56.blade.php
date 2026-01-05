@@ -30,7 +30,15 @@
         $ticket_id = $_GET['ticketId'];
         $azkiPayments = Azkivam_payment_records::where('ticket_id', $ticket_id)->first();
         if ($azkiPayments and $azkiPayments->status == 'pending') {
-            $verify = Azkivam::verifyAzkivamTicketWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
+            $accessToken = Azkivam::getAccessToken();
+            if ($accessToken['status'] != 200) {
+                return response->json([
+                    'status' => 400,
+                    'result' => $accessToken,
+                ]);
+            }
+            $accessToken = $accessToken['accessToken'];
+            $verify = Azkivam::verifyAzkivamTicketWithToken($accessToken, ['ticket_id' => $ticket_id]);
             if ($verify['status'] == 200) {
                 $azkiPayments->status = 'verify';
                 $azkiPayments->save();
