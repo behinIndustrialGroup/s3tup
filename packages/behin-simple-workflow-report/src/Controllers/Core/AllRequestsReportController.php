@@ -62,10 +62,10 @@ class AllRequestsReportController extends Controller
             });
 
         $endDate = Carbon::now()
-            ->startOfWeek(Carbon::WEDNESDAY)->endOfDay();
+            ->startOfWeek(Carbon::WEDNESDAY);
 
         $startDate = (clone $endDate)->subWeek();
-        dd($startDate, $endDate);
+        dd($endDate->endOfDay());
 
         $inboxesWeekly = Inbox::whereIn('task_id', $tasks->pluck('id'))
             // ->whereNotIn('status', ['done', 'doneByOther', 'canceled'])
