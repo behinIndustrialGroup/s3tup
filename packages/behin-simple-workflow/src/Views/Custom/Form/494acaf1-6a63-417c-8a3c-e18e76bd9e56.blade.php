@@ -99,7 +99,7 @@
         runScript(scriptId, fd, function(response) {
             console.log(response)
             if (response.status == 200) {
-                window.location.href = response.payment_url;
+                // window.location.href = response.payment_url;
             } else {
                 console.log(response);
                 show_error("خطایی رخ داده است");
