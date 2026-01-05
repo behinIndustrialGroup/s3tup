@@ -135,6 +135,47 @@ class Azkivam
         }
     }
 
+    public static function verifyAzkivamTicketWithToken(string $accessToken, array $payload)
+    {
+        try {
+            $response = Http::timeout(15)
+                ->withHeaders([
+                    'Authorization' => 'Bearer ' . $accessToken,
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                ])
+                ->post('https://api.azkiloan.com/payment/verify', $payload);
+
+            $response->throw();
+            return $response->body();
+            Log::info($response->body());
+            if($response['rsCode'] == 0){
+                return [
+                    'error' => false,
+                    'status' => 200,
+                    'ticket_id' => $response['result']['ticket_id'],
+                    'payment_url' => $response['result']['payment_uri'],
+                ];
+            }else{
+                return [
+                    'error' => true,
+                    'status' => 400,
+                    'body' => $response->body(),
+                ];
+            }
+
+            return $response->json();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return [
+                'error'   => true,
+                'status' => 500,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
 
 
     /**

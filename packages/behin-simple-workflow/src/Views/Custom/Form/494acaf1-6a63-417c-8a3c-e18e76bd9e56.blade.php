@@ -5,6 +5,7 @@
     use Behin\SimpleWorkflow\Models\Entities\Zarinpal_payment_records;
     use Behin\SimpleWorkflow\Models\Entities\Azkivam_payment_records;
     use App\Http\Controllers\zarinPal;
+    use App\Http\Controllers\Azkivam;
 
     if (isset($_GET['Authority'])) {
         $authority = $_GET['Authority'];
@@ -23,6 +24,23 @@
             // echo '<pre>';
             // print_r($zarinpalVerify);
             // echo '</pre>';
+        }
+    }
+    if(isset($_GET['ticket_id'])){
+        $ticket_id = $_GET['ticket_id'];
+        $azkiPayments = Azkivam_payment_records::where('ticket_id', $ticket_id)->first();
+        if($azkiPayments and $azkiPayments->status == 'created'){
+            $status = Azkivam::getAzkivamTicketStatusWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
+            if(isset($status['result']['status']) and $status['result']['status'] == 8){
+                $azkiPayments->status = 'done';
+                $azkiPayments->save();
+                $verify = Azkivam::verifyAzkivamTicketWithToken($azkiPayments->access_token, ['ticket_id' => $ticket_id]);
+                if(isset($verify['result']['status']) and $verify['result']['status'] == 2){
+                    $azkiPayments->status = 'verify';
+                    $azkiPayments->save();
+                }
+                echo "<div class='alert alert-success'>پرداخت با موفقیت انجام شد</div>";
+            }
         }
     }
     $sale = Sales::where('case_number', $case->number)->first();
