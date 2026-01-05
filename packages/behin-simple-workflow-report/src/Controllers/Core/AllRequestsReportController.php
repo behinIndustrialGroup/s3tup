@@ -64,6 +64,7 @@ class AllRequestsReportController extends Controller
         $endDate = Carbon::now()
             ->startOfWeek(Carbon::WEDNESDAY)
             ->subWeek();
+            dd($endDate);
 
         $startDate = (clone $endDate)->subWeek();
         $inboxesWeekly = Inbox::whereIn('task_id', $tasks->pluck('id'))
