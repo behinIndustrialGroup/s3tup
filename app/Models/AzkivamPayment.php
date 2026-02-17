@@ -16,11 +16,11 @@ class AzkivamPayment extends Model
     public const STATUS_FAILED = 'failed';
 
     protected $fillable = [
-        'payment_id',
+        'ticket_id',
+        'payment_uri',
         'order_id',
         'amount',
         'status',
-        'gateway_url',
         'callback_url',
         'tracking_code',
         'meta',

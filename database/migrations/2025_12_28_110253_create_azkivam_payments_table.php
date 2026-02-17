@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('azkivam_payments', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_id')->unique();
+            $table->string('ticket_id')->unique();
+            $table->string('payment_uri');
             $table->string('order_id');
             $table->unsignedBigInteger('amount');
             $table->string('status')->default('pending');
-            $table->string('gateway_url')->nullable();
             $table->string('callback_url');
             $table->string('tracking_code')->nullable();
             $table->json('meta')->nullable();
